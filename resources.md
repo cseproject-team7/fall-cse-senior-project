@@ -1,44 +1,43 @@
 # Project Team 7 Additional Information 
 Here is where additional information/sites that will help can be stored
 
-1. Development tools and resources
-a. Download Visual Studio Code - Mac, Linux, Windows
-b. GitHub · Build and ship software on a single, collaborative platform · GitHub
-c. GitHub Copilot · GitHub
+## Development Tools and Resources
+- [Download Visual Studio Code - Mac, Linux, Windows](https://code.visualstudio.com/)
+- [GitHub · Build and ship software on a single, collaborative platform](https://github.com/)
+- [GitHub Copilot · GitHub](https://github.com/features/copilot)
 
-2. Overview of Azure accounts, tenant, subscriptions, role based access control
-a. Subscriptions, licenses, accounts, and tenants for Microsoft's cloud offerings - Microsoft 365 Enterprise | Microsoft Learn
-b. Microsoft Entra RBAC documentation - Microsoft Entra ID | Microsoft Learn
-c. Microsoft Graph REST API v1.0 endpoint reference - Microsoft Graph v1.0 | Microsoft Learn
-d. Create User - Microsoft Graph v1.0 | Microsoft Learn
+## Azure Accounts, Tenants, and RBAC
+- [Subscriptions, licenses, accounts, and tenants for Microsoft's cloud offerings - Microsoft 365 Enterprise](https://learn.microsoft.com/microsoft-365/enterprise/subscriptions-licenses-accounts-and-tenants)
+- [Microsoft Entra RBAC documentation - Microsoft Entra ID](https://learn.microsoft.com/entra/identity/role-based-access-control/)
+- [Microsoft Graph REST API v1.0 endpoint reference](https://learn.microsoft.com/graph/api/overview?view=graph-rest-1.0)
+- [Create User - Microsoft Graph v1.0](https://learn.microsoft.com/graph/api/user-post-users?view=graph-rest-1.0)
 
-3. Commonly used Azure resources
-a. Deploy Azure Virtual Desktop | Azure Docs
-b. Storage account overview - Azure Storage | Microsoft Learn
-c. What is Azure Virtual Network? | Microsoft Learn
-d. What is Microsoft Entra ID? | Azure Docs
+## Commonly Used Azure Resources
+- [Deploy Azure Virtual Desktop](https://learn.microsoft.com/azure/virtual-desktop/)
+- [Storage account overview - Azure Storage](https://learn.microsoft.com/azure/storage/common/storage-account-overview)
+- [What is Azure Virtual Network?](https://learn.microsoft.com/azure/virtual-network/virtual-networks-overview)
+- [What is Microsoft Entra ID?](https://learn.microsoft.com/azure/active-directory/fundamentals/active-directory-whatis)
 
-4. Potential automation options
-a. What is Azure App Testing? | Microsoft Learn
-b. GitHub Actions documentation - GitHub Docs
-c. Azure Automation Runbook Types | Microsoft Learn
-d. Overview - Azure Logic Apps | Microsoft Learn
-e. Azure Functions overview | Microsoft Learn
+## Potential Automation Options
+- [What is Azure App Testing?](https://learn.microsoft.com/azure/app-service/app-service-web-test)
+- [GitHub Actions documentation](https://docs.github.com/actions)
+- [Azure Automation Runbook Types](https://learn.microsoft.com/azure/automation/automation-runbook-types)
+- [Overview - Azure Logic Apps](https://learn.microsoft.com/azure/logic-apps/logic-apps-overview)
+- [Azure Functions overview](https://learn.microsoft.com/azure/azure-functions/functions-overview)
 
-5. Log harvesting and analytics
-a. Overview of Log Analytics in Azure Monitor - Azure Monitor | Microsoft Learn
-b. Azure Monitor Logs - Azure Monitor | Microsoft Learn
+## Log Harvesting and Analytics
+- [Overview of Log Analytics in Azure Monitor](https://learn.microsoft.com/azure/azure-monitor/logs/log-analytics-overview)
+- [Azure Monitor Logs](https://learn.microsoft.com/azure/azure-monitor/logs/data-platform-logs)
 
-6. Azure security and identity 
-a. Azure security fundamentals documentation | Microsoft Learn
-b. Authentication and authorization basics - Microsoft Graph | Microsoft Learn
-c. Microsoft Defender for Cloud documentation - Microsoft Defender for Cloud | Microsoft Learn
-d. What is Microsoft Sentinel? | Microsoft Learn
-e. GitHub - MicrosoftLearning/AZ500-AzureSecurityTechnologies: Microsoft Azure Security Technologies
-f. What are access reviews? - Microsoft Entra - Microsoft Entra ID Governance | Microsoft Learn
+## Azure Security and Identity
+- [Azure security fundamentals documentation](https://learn.microsoft.com/azure/security/fundamentals/)
+- [Authentication and authorization basics - Microsoft Graph](https://learn.microsoft.com/graph/auth/auth-concepts)
+- [Microsoft Defender for Cloud documentation](https://learn.microsoft.com/azure/defender-for-cloud/)
+- [What is Microsoft Sentinel?](https://learn.microsoft.com/azure/sentinel/overview)
+- [Microsoft Azure Security Technologies (GitHub)](https://github.com/MicrosoftLearning/AZ500-AzureSecurityTechnologies)
+- [What are access reviews? - Microsoft Entra ID Governance](https://learn.microsoft.com/entra/id-governance/access-reviews-overview)
 
-7. Azure AI resources
-a. What is Azure AI Foundry? - Azure AI Foundry | Microsoft Learn
-b. Overview - Microsoft Copilot Studio | Microsoft Learn
-c. What is Azure OpenAI in Azure AI Foundry Models? | Microsoft Learn
-
+## Azure AI Resources
+- [What is Azure AI Foundry?](https://learn.microsoft.com/azure/ai-foundry/what-is-ai-foundry)
+- [Overview - Microsoft Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/overview)
+- [What is Azure OpenAI in Azure AI Foundry Models?](https://learn.microsoft.com/azure/ai-services/openai/overview)
