@@ -1,0 +1,64 @@
+[
+    {
+        "activityDisplayName": "Submit assignment",
+        "category": "UserManagement",
+        "loggedByService": "Canvas",
+        "result": "success",
+        "resultReason": "",
+        "initiatedBy": {
+            "user": {
+                "displayName": "Canvas Web UI",
+                "userPrincipalName": "canvas@local",
+                "id": "c75a5710-0f42-454c-9ad9-35dac6638a04"
+            }
+        },
+        "modifiedProperties": [
+            {
+                "displayName": "AssignmentSubmission",
+                "oldValue": null,
+                "newValue": "\"Assignment ID: 101\""
+            },
+            {
+                "displayName": "Included Updated Properties",
+                "oldValue": null,
+                "newValue": "\"AssignmentSubmission\""
+            }
+        ],
+        "additionalDetails": [
+            {"key": "Course", "value": "CSE Senior Project"},
+            {"key": "Persona", "value": "Student"}
+        ],
+        "weight": 2
+    },
+    {
+        "activityDisplayName": "Participate in discussion",
+        "category": "UserManagement",
+        "loggedByService": "Canvas",
+        "result": "success",
+        "resultReason": "",
+        "initiatedBy": {
+            "user": {
+                "displayName": "Canvas Discussion Board",
+                "userPrincipalName": "canvas@local",
+                "id": "6c83c0bc-cdd3-40cc-a5fd-c9fd1bfc444b"
+            }
+        },
+        "modifiedProperties": [
+            {
+                "displayName": "DiscussionPost",
+                "oldValue": null,
+                "newValue": "\"Thread: Week 4 Reflection\""
+            },
+            {
+                "displayName": "Included Updated Properties",
+                "oldValue": null,
+                "newValue": "\"DiscussionPost\""
+            }
+        ],
+        "additionalDetails": [
+            {"key": "Course", "value": "CSE Senior Project"},
+            {"key": "Persona", "value": "Student"}
+        ],
+        "weight": 1
+    }
+]

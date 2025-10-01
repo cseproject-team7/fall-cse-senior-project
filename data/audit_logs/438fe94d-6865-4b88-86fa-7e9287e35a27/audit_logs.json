@@ -1,0 +1,236 @@
+[
+    {
+        "id": "Directory_68fc2d58-4ce0-49d9-bd73-99d316b04fe8_1A1309D32995",
+        "category": "UserManagement",
+        "correlationId": "68fc2d58-4ce0-49d9-bd73-99d316b04fe8",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Submit assignment",
+        "activityDateTime": "2025-10-01T18:19:50.707980+00:00",
+        "loggedByService": "Canvas",
+        "initiatedBy": {
+            "user": {
+                "displayName": "Canvas Web UI",
+                "userPrincipalName": "canvas@local",
+                "id": "c75a5710-0f42-454c-9ad9-35dac6638a04"
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "438fe94d-6865-4b88-86fa-7e9287e35a27",
+                "displayName": "vuser1",
+                "type": "User",
+                "userPrincipalName": "vuser1@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "AssignmentSubmission",
+                        "oldValue": null,
+                        "newValue": "\"Assignment ID: 101\""
+                    },
+                    {
+                        "displayName": "Included Updated Properties",
+                        "oldValue": null,
+                        "newValue": "\"AssignmentSubmission\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "Course",
+                "value": "CSE Senior Project"
+            },
+            {
+                "key": "Persona",
+                "value": "Student"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    },
+    {
+        "id": "Directory_cda88709-16a5-42a7-a7e4-320a49586454_04CDE24B358F",
+        "category": "UserManagement",
+        "correlationId": "cda88709-16a5-42a7-a7e4-320a49586454",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Submit assignment",
+        "activityDateTime": "2025-10-01T18:19:45.708187+00:00",
+        "loggedByService": "Canvas",
+        "initiatedBy": {
+            "user": {
+                "displayName": "Canvas Web UI",
+                "userPrincipalName": "canvas@local",
+                "id": "c75a5710-0f42-454c-9ad9-35dac6638a04"
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "438fe94d-6865-4b88-86fa-7e9287e35a27",
+                "displayName": "vuser1",
+                "type": "User",
+                "userPrincipalName": "vuser1@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "AssignmentSubmission",
+                        "oldValue": null,
+                        "newValue": "\"Assignment ID: 101\""
+                    },
+                    {
+                        "displayName": "Included Updated Properties",
+                        "oldValue": null,
+                        "newValue": "\"AssignmentSubmission\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "Course",
+                "value": "CSE Senior Project"
+            },
+            {
+                "key": "Persona",
+                "value": "Student"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    },
+    {
+        "id": "Directory_3b18eb3f-bcb9-4576-b145-f4ba2cd0079d_CB4A8C59927C",
+        "category": "UserManagement",
+        "correlationId": "3b18eb3f-bcb9-4576-b145-f4ba2cd0079d",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Reset user password",
+        "activityDateTime": "2025-10-01T18:21:31.538977+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "user": {
+                "displayName": "Local Helpdesk",
+                "userPrincipalName": "helpdesk@local",
+                "id": "91879544-abfb-42cb-a1b3-4a63e70774a3"
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "438fe94d-6865-4b88-86fa-7e9287e35a27",
+                "displayName": "vuser1",
+                "type": "User",
+                "userPrincipalName": "vuser1@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "PasswordProfile",
+                        "oldValue": null,
+                        "newValue": "\"********\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "ResetReason",
+                "value": "User request"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    },
+    {
+        "id": "Directory_392a0000-f04e-4d34-8069-371cf023a8e3_5740561324E5",
+        "category": "UserManagement",
+        "correlationId": "392a0000-f04e-4d34-8069-371cf023a8e3",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Update user",
+        "activityDateTime": "2025-10-01T18:21:26.539435+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "app": {
+                "appId": null,
+                "displayName": "Codex Persona Simulator",
+                "servicePrincipalId": "1226afb4-5922-4b2e-a86b-9e7b4bae7040",
+                "servicePrincipalName": null
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "438fe94d-6865-4b88-86fa-7e9287e35a27",
+                "displayName": "vuser1",
+                "type": "User",
+                "userPrincipalName": "vuser1@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "Department",
+                        "oldValue": "\"Sales\"",
+                        "newValue": "\"Security\""
+                    },
+                    {
+                        "displayName": "Included Updated Properties",
+                        "oldValue": null,
+                        "newValue": "\"Department\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "Persona",
+                "value": "Security Analyst"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    },
+    {
+        "id": "Directory_39fa4252-469f-4b37-b862-66e8e6fad7de_9791CE8C77CF",
+        "category": "UserManagement",
+        "correlationId": "39fa4252-469f-4b37-b862-66e8e6fad7de",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Reset user password",
+        "activityDateTime": "2025-10-01T18:21:21.539472+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "user": {
+                "displayName": "Local Helpdesk",
+                "userPrincipalName": "helpdesk@local",
+                "id": "91879544-abfb-42cb-a1b3-4a63e70774a3"
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "438fe94d-6865-4b88-86fa-7e9287e35a27",
+                "displayName": "vuser1",
+                "type": "User",
+                "userPrincipalName": "vuser1@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "PasswordProfile",
+                        "oldValue": null,
+                        "newValue": "\"********\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "ResetReason",
+                "value": "User request"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    }
+]

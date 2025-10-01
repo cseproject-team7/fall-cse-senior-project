@@ -1,0 +1,146 @@
+[
+    {
+        "id": "Directory_10fe0394-ab2e-4882-a86d-6f3212f88f7d_5D26806978FA",
+        "category": "UserManagement",
+        "correlationId": "10fe0394-ab2e-4882-a86d-6f3212f88f7d",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Update user",
+        "activityDateTime": "2025-10-01T18:21:41.540360+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "app": {
+                "appId": null,
+                "displayName": "Codex Persona Simulator",
+                "servicePrincipalId": "1226afb4-5922-4b2e-a86b-9e7b4bae7040",
+                "servicePrincipalName": null
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "ed524d0b-59bf-45f6-86e0-9209516c7879",
+                "displayName": "vuser3",
+                "type": "User",
+                "userPrincipalName": "vuser3@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "Department",
+                        "oldValue": "\"Sales\"",
+                        "newValue": "\"Security\""
+                    },
+                    {
+                        "displayName": "Included Updated Properties",
+                        "oldValue": null,
+                        "newValue": "\"Department\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "Persona",
+                "value": "Security Analyst"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    },
+    {
+        "id": "Directory_7e5b5069-f50f-43d2-9c80-81485747bcce_0A4EFF99B180",
+        "category": "UserManagement",
+        "correlationId": "7e5b5069-f50f-43d2-9c80-81485747bcce",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Update user",
+        "activityDateTime": "2025-10-01T18:21:36.540397+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "app": {
+                "appId": null,
+                "displayName": "Codex Persona Simulator",
+                "servicePrincipalId": "1226afb4-5922-4b2e-a86b-9e7b4bae7040",
+                "servicePrincipalName": null
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "ed524d0b-59bf-45f6-86e0-9209516c7879",
+                "displayName": "vuser3",
+                "type": "User",
+                "userPrincipalName": "vuser3@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "Department",
+                        "oldValue": "\"Sales\"",
+                        "newValue": "\"Security\""
+                    },
+                    {
+                        "displayName": "Included Updated Properties",
+                        "oldValue": null,
+                        "newValue": "\"Department\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "Persona",
+                "value": "Security Analyst"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    },
+    {
+        "id": "Directory_c62d8ede-0f9f-4873-bfbd-51f40d923668_FDB97EAFEC0B",
+        "category": "UserManagement",
+        "correlationId": "c62d8ede-0f9f-4873-bfbd-51f40d923668",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Update user",
+        "activityDateTime": "2025-10-01T18:21:31.540430+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "app": {
+                "appId": null,
+                "displayName": "Codex Persona Simulator",
+                "servicePrincipalId": "1226afb4-5922-4b2e-a86b-9e7b4bae7040",
+                "servicePrincipalName": null
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "ed524d0b-59bf-45f6-86e0-9209516c7879",
+                "displayName": "vuser3",
+                "type": "User",
+                "userPrincipalName": "vuser3@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "Department",
+                        "oldValue": "\"Sales\"",
+                        "newValue": "\"Security\""
+                    },
+                    {
+                        "displayName": "Included Updated Properties",
+                        "oldValue": null,
+                        "newValue": "\"Department\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "Persona",
+                "value": "Security Analyst"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    }
+]

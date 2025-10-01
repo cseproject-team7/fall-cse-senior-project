@@ -1,0 +1,140 @@
+[
+    {
+        "id": "Directory_bcdd4032-8cee-4926-a374-e7c4a42d43ba_5BD31BF2D7E7",
+        "category": "UserManagement",
+        "correlationId": "bcdd4032-8cee-4926-a374-e7c4a42d43ba",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Update user",
+        "activityDateTime": "2025-10-01T18:21:41.541970+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "app": {
+                "appId": null,
+                "displayName": "Codex Persona Simulator",
+                "servicePrincipalId": "1226afb4-5922-4b2e-a86b-9e7b4bae7040",
+                "servicePrincipalName": null
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "d232a0a7-68ba-4d91-b4a5-ad36ac29e1ee",
+                "displayName": "vuser7",
+                "type": "User",
+                "userPrincipalName": "vuser7@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "Department",
+                        "oldValue": "\"Sales\"",
+                        "newValue": "\"Security\""
+                    },
+                    {
+                        "displayName": "Included Updated Properties",
+                        "oldValue": null,
+                        "newValue": "\"Department\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "Persona",
+                "value": "Security Analyst"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    },
+    {
+        "id": "Directory_f0e73907-2325-4361-91e3-e7eed6ebe142_AD26DEEA54D1",
+        "category": "UserManagement",
+        "correlationId": "f0e73907-2325-4361-91e3-e7eed6ebe142",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Update user",
+        "activityDateTime": "2025-10-01T18:21:36.542005+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "app": {
+                "appId": null,
+                "displayName": "Codex Persona Simulator",
+                "servicePrincipalId": "1226afb4-5922-4b2e-a86b-9e7b4bae7040",
+                "servicePrincipalName": null
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "d232a0a7-68ba-4d91-b4a5-ad36ac29e1ee",
+                "displayName": "vuser7",
+                "type": "User",
+                "userPrincipalName": "vuser7@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "Department",
+                        "oldValue": "\"Sales\"",
+                        "newValue": "\"Security\""
+                    },
+                    {
+                        "displayName": "Included Updated Properties",
+                        "oldValue": null,
+                        "newValue": "\"Department\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "Persona",
+                "value": "Security Analyst"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    },
+    {
+        "id": "Directory_b95241e5-c600-4f9c-acf3-b06833bb6c79_20AE32456010",
+        "category": "UserManagement",
+        "correlationId": "b95241e5-c600-4f9c-acf3-b06833bb6c79",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Reset user password",
+        "activityDateTime": "2025-10-01T18:21:31.542036+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "user": {
+                "displayName": "Local Helpdesk",
+                "userPrincipalName": "helpdesk@local",
+                "id": "91879544-abfb-42cb-a1b3-4a63e70774a3"
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "d232a0a7-68ba-4d91-b4a5-ad36ac29e1ee",
+                "displayName": "vuser7",
+                "type": "User",
+                "userPrincipalName": "vuser7@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "PasswordProfile",
+                        "oldValue": null,
+                        "newValue": "\"********\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "ResetReason",
+                "value": "User request"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    }
+]

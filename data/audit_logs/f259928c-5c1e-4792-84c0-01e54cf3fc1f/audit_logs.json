@@ -1,0 +1,128 @@
+[
+    {
+        "id": "Directory_a11ca935-dfb2-4d9b-ba33-4f13b76613e9_EB19604AD6C8",
+        "category": "UserManagement",
+        "correlationId": "a11ca935-dfb2-4d9b-ba33-4f13b76613e9",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Reset user password",
+        "activityDateTime": "2025-10-01T18:21:41.539931+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "user": {
+                "displayName": "Local Helpdesk",
+                "userPrincipalName": "helpdesk@local",
+                "id": "91879544-abfb-42cb-a1b3-4a63e70774a3"
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "f259928c-5c1e-4792-84c0-01e54cf3fc1f",
+                "displayName": "vuser2",
+                "type": "User",
+                "userPrincipalName": "vuser2@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "PasswordProfile",
+                        "oldValue": null,
+                        "newValue": "\"********\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "ResetReason",
+                "value": "User request"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    },
+    {
+        "id": "Directory_f806025c-b1b4-4d84-9ebb-921596e5277b_4BABBDD2678F",
+        "category": "UserManagement",
+        "correlationId": "f806025c-b1b4-4d84-9ebb-921596e5277b",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Reset user password",
+        "activityDateTime": "2025-10-01T18:21:36.539973+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "user": {
+                "displayName": "Local Helpdesk",
+                "userPrincipalName": "helpdesk@local",
+                "id": "91879544-abfb-42cb-a1b3-4a63e70774a3"
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "f259928c-5c1e-4792-84c0-01e54cf3fc1f",
+                "displayName": "vuser2",
+                "type": "User",
+                "userPrincipalName": "vuser2@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "PasswordProfile",
+                        "oldValue": null,
+                        "newValue": "\"********\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "ResetReason",
+                "value": "User request"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    },
+    {
+        "id": "Directory_4110bc08-de99-4fe4-8033-d2ab8093007d_27DA8F5C52AE",
+        "category": "UserManagement",
+        "correlationId": "4110bc08-de99-4fe4-8033-d2ab8093007d",
+        "result": "success",
+        "resultReason": "",
+        "activityDisplayName": "Reset user password",
+        "activityDateTime": "2025-10-01T18:21:31.540003+00:00",
+        "loggedByService": "Core Directory",
+        "initiatedBy": {
+            "user": {
+                "displayName": "Local Helpdesk",
+                "userPrincipalName": "helpdesk@local",
+                "id": "91879544-abfb-42cb-a1b3-4a63e70774a3"
+            }
+        },
+        "userAgent": null,
+        "targetResources": [
+            {
+                "id": "f259928c-5c1e-4792-84c0-01e54cf3fc1f",
+                "displayName": "vuser2",
+                "type": "User",
+                "userPrincipalName": "vuser2@axgile.com",
+                "groupType": null,
+                "modifiedProperties": [
+                    {
+                        "displayName": "PasswordProfile",
+                        "oldValue": null,
+                        "newValue": "\"********\""
+                    }
+                ]
+            }
+        ],
+        "additionalDetails": [
+            {
+                "key": "ResetReason",
+                "value": "User request"
+            }
+        ],
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant"
+    }
+]

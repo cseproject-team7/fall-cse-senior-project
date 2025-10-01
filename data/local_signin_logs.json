@@ -1,0 +1,1850 @@
+[
+    {
+        "id": "3eaf73b1-1fa1-4f86-8923-b22adf035d78",
+        "createdDateTime": "2025-10-01T14:21:12Z",
+        "userDisplayName": "vuser1",
+        "userPrincipalName": "vuser1@axgile.com",
+        "userId": "438fe94d-6865-4b88-86fa-7e9287e35a27",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "10.129.36.136",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "377b6354-21db-42b4-b6e9-34d78e3e328e",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 379,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser1@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 65123,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "af7ce8746b514b9a8d1b556c5164324c",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "c94f9f49-d411-44f0-9374-10e780a3cdb5",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "70834d0f-2084-43c4-91ef-f9ed2e99f90f",
+            "displayName": "vuser1's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Tampa",
+            "state": "Florida",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 28.01999,
+                "longitude": -82.36786
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "False"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T14:21:12Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "90f4d2f9-fb5c-43cc-b70d-ff7db465f37c",
+        "createdDateTime": "2025-10-01T15:33:11Z",
+        "userDisplayName": "vuser2",
+        "userPrincipalName": "vuser2@axgile.com",
+        "userId": "f259928c-5c1e-4792-84c0-01e54cf3fc1f",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "10.216.137.150",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "e1adf4f3-cec8-4206-a9ea-f4a31a53fee3",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 811,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser2@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 64571,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "8271b4824fc542e4a2d358991bb2598e",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "d9c60763-6b2f-4748-a46e-f56d996a67ac",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "74371d62-151d-4c63-88a6-e9576a4bdfbc",
+            "displayName": "vuser2's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Toronto",
+            "state": "Ontario",
+            "countryOrRegion": "CA",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 43.65107,
+                "longitude": -79.347015
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "False"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T15:33:11Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "c32ddf4a-f7a8-4e79-b6a9-ac5ca1f3859a",
+        "createdDateTime": "2025-10-01T17:04:10Z",
+        "userDisplayName": "vuser3",
+        "userPrincipalName": "vuser3@axgile.com",
+        "userId": "ed524d0b-59bf-45f6-86e0-9209516c7879",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "192.168.131.62",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "add8c48e-2a95-4edd-8a50-cc7d3ed0821e",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 535,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser3@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 65043,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "4650812329d544ffaea1ea9876292dc6",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "1a0ffd60-78d0-46c7-b724-96b27b75e1b5",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "0c9622b4-17db-418e-a037-9f9d799f1ee3",
+            "displayName": "vuser3's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Austin",
+            "state": "Texas",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 30.2672,
+                "longitude": -97.7431
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "True"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T17:04:10Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "04c28c68-c6a3-4ecc-ac83-2d70a78be9df",
+        "createdDateTime": "2025-10-01T15:02:09Z",
+        "userDisplayName": "vuser4",
+        "userPrincipalName": "vuser4@axgile.com",
+        "userId": "32e2093e-58b3-424f-9a6a-42a125fba9e2",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "172.18.163.220",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "54b0ea83-1aeb-4da0-8ca3-79ece15c2766",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 489,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser4@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 64645,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "70a6c77a4ffd417493145ea778fc4ea7",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "1c252603-2155-45a2-adf2-78ac82fd9b4a",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "3ccd62d7-1cf3-4404-beb4-2582a9a8edcf",
+            "displayName": "vuser4's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Seattle",
+            "state": "Washington",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 47.6062,
+                "longitude": -122.3321
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "True"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T15:02:09Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "8fa46340-14e6-4c9f-9b61-e9eabad23308",
+        "createdDateTime": "2025-10-01T16:22:08Z",
+        "userDisplayName": "vuser5",
+        "userPrincipalName": "vuser5@axgile.com",
+        "userId": "e561e43c-695e-4cad-8e0b-2f1cf1b75ea5",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "192.168.164.150",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "1de6a7dd-b607-4469-9831-91ba60e1d841",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 251,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser5@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 64827,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "4af566e4a3ca445db419348fc42e4f3b",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "0f9b7824-d556-4a3e-a3f4-9048ed413a90",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "a212268c-ead8-4d64-980d-057b61da2516",
+            "displayName": "vuser5's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Seattle",
+            "state": "Washington",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 47.6062,
+                "longitude": -122.3321
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "False"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T16:22:08Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "f7bf8067-eb9c-449d-9f1c-2f763ccadc99",
+        "createdDateTime": "2025-10-01T14:57:07Z",
+        "userDisplayName": "vuser6",
+        "userPrincipalName": "vuser6@axgile.com",
+        "userId": "41a8e355-2832-4b97-b9a7-d4c30781c7cf",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "192.168.35.163",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "c2ac5cfe-2573-4e68-84d8-d2bb1c22943e",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 403,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser6@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 64560,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "6b384fa260914d9eb39e564767af0a1d",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "e1a181ee-57ef-4a42-8d63-fd73182d4de2",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "c861c082-f5aa-44b3-a283-906a90968492",
+            "displayName": "vuser6's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Toronto",
+            "state": "Ontario",
+            "countryOrRegion": "CA",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 43.65107,
+                "longitude": -79.347015
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "True"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T14:57:07Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "a033aaee-8ea7-434b-adcb-e0e454200767",
+        "createdDateTime": "2025-10-01T15:28:06Z",
+        "userDisplayName": "vuser7",
+        "userPrincipalName": "vuser7@axgile.com",
+        "userId": "d232a0a7-68ba-4d91-b4a5-ad36ac29e1ee",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "172.20.25.62",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "51d0f666-397f-44c2-af09-eb752fa362b8",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 696,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser7@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 65482,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "3878d9263fa94cc4a8be755810cfb8a9",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "1dbe2074-2948-464d-830a-3c306efd7e2b",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "1ea52a79-4992-488a-8553-672f0e693680",
+            "displayName": "vuser7's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Seattle",
+            "state": "Washington",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 47.6062,
+                "longitude": -122.3321
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "True"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T15:28:06Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "b0f98731-cd0a-4669-9f6d-9c9ace63ef93",
+        "createdDateTime": "2025-10-01T15:54:11Z",
+        "userDisplayName": "vuser1",
+        "userPrincipalName": "vuser1@axgile.com",
+        "userId": "438fe94d-6865-4b88-86fa-7e9287e35a27",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "192.168.9.130",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "f6fc3d9b-8340-4ff8-9613-d6c430663eba",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 126,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser1@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 64706,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "013f0e6a19f6403795c77f4f6959ffa3",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "aa52e83b-010c-456a-aa09-0d02870b9d5d",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "1ca6fd15-28ac-46a7-972d-2d83d7e2da79",
+            "displayName": "vuser1's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Austin",
+            "state": "Texas",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 30.2672,
+                "longitude": -97.7431
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "False"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T15:54:11Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "6bcbe7e1-7801-4cb5-99e8-7e773912958c",
+        "createdDateTime": "2025-10-01T14:58:10Z",
+        "userDisplayName": "vuser2",
+        "userPrincipalName": "vuser2@axgile.com",
+        "userId": "f259928c-5c1e-4792-84c0-01e54cf3fc1f",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "172.17.201.98",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "460f354a-22a4-4cca-b586-11e7c6a292aa",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 802,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser2@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 65291,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "4402874e5e11486ea90c7884934ac095",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "da20beef-1977-478a-a231-fbdc209f2c7f",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "8608dd23-2a5b-4e55-b71b-0e263e4c7c02",
+            "displayName": "vuser2's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Madrid",
+            "state": "Madrid",
+            "countryOrRegion": "ES",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 40.4168,
+                "longitude": -3.7038
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "False"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T14:58:10Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "78410dba-3b5a-48fa-8030-25e7002570be",
+        "createdDateTime": "2025-10-01T17:39:09Z",
+        "userDisplayName": "vuser3",
+        "userPrincipalName": "vuser3@axgile.com",
+        "userId": "ed524d0b-59bf-45f6-86e0-9209516c7879",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "172.26.165.222",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "7fcca868-e52c-49c5-8eae-bf4c5e55cf19",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 124,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser3@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 65178,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "fea94130c7274d96a6b6f2105293e09e",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "b6630a17-51d2-46e8-b2b4-edc7ab655069",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "5c8e070b-bf5d-40a4-95d5-23da53f03c7d",
+            "displayName": "vuser3's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Seattle",
+            "state": "Washington",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 47.6062,
+                "longitude": -122.3321
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "True"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T17:39:09Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "82d7687f-3ba0-433d-8124-e5d01f8f01bf",
+        "createdDateTime": "2025-10-01T16:53:08Z",
+        "userDisplayName": "vuser4",
+        "userPrincipalName": "vuser4@axgile.com",
+        "userId": "32e2093e-58b3-424f-9a6a-42a125fba9e2",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "192.168.136.50",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "67859f51-d87d-4907-ba3a-975b830f00a2",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 500,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser4@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 64727,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "e1b6ea35c81d4ed3b4978e52c78fe31e",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "ef471795-b7f8-400f-a020-47e9b35b3c98",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "4f59ad0e-6f71-40a2-9d97-69ac997c65c3",
+            "displayName": "vuser4's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Austin",
+            "state": "Texas",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 30.2672,
+                "longitude": -97.7431
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "True"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T16:53:08Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "7017bcd5-7e56-430f-9cf6-e2909a95e481",
+        "createdDateTime": "2025-10-01T15:48:07Z",
+        "userDisplayName": "vuser5",
+        "userPrincipalName": "vuser5@axgile.com",
+        "userId": "e561e43c-695e-4cad-8e0b-2f1cf1b75ea5",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "192.168.189.23",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "df3b34d0-9ea3-4eaf-9598-1c1dff40b1fb",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 304,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser5@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 64988,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "ea709c95ed0f4b48bc1400ce84aeb781",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "eac783bf-9d41-414c-85ed-30f81bdec4dc",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "6ace91f3-e104-4a19-90e1-e6305132b2b3",
+            "displayName": "vuser5's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Tampa",
+            "state": "Florida",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 28.01999,
+                "longitude": -82.36786
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "True"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T15:48:07Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "09b76c32-4b0d-43eb-aec7-8c2a231c02ef",
+        "createdDateTime": "2025-10-01T17:25:06Z",
+        "userDisplayName": "vuser6",
+        "userPrincipalName": "vuser6@axgile.com",
+        "userId": "41a8e355-2832-4b97-b9a7-d4c30781c7cf",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "192.168.1.112",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "0c0965ca-a1a4-481e-a98a-8a48aacc8ef0",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 477,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser6@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 65375,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "e8d252efc6754549bb0701b278b85995",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "9489a6e1-0daa-433e-a18c-ae9485d45fba",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "3014daa0-ab4c-4303-a14d-eb94406a04b6",
+            "displayName": "vuser6's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Seattle",
+            "state": "Washington",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 47.6062,
+                "longitude": -122.3321
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "False"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T17:25:06Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    },
+    {
+        "id": "57881ec1-eb60-445b-8c95-8ff1e9320307",
+        "createdDateTime": "2025-10-01T15:41:05Z",
+        "userDisplayName": "vuser7",
+        "userPrincipalName": "vuser7@axgile.com",
+        "userId": "d232a0a7-68ba-4d91-b4a5-ad36ac29e1ee",
+        "appId": "00000000-0000-0000-0000-000000000000",
+        "appDisplayName": "Local Simulation App",
+        "ipAddress": "10.228.211.156",
+        "ipAddressFromResourceProvider": null,
+        "clientAppUsed": "Browser",
+        "userAgent": "CodexLocalSimulator/1.0",
+        "correlationId": "c8df42fe-8c9b-4ccb-91e9-79dd8a0b60b1",
+        "conditionalAccessStatus": "notApplied",
+        "originalRequestId": "",
+        "isInteractive": true,
+        "tokenIssuerName": "Local Tenant",
+        "tokenIssuerType": "AzureAd",
+        "clientCredentialType": "none",
+        "processingTimeInMilliseconds": 271,
+        "riskDetail": "none",
+        "riskLevelAggregated": "none",
+        "riskLevelDuringSignIn": "none",
+        "riskState": "none",
+        "riskEventTypes_v2": [],
+        "resourceDisplayName": "Local Simulation App",
+        "resourceId": "00000000-0000-0000-0000-000000000000",
+        "resourceTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantId": "00000000-0000-0000-0000-000000000000",
+        "homeTenantName": "Local Tenant",
+        "authenticationMethodsUsed": [
+            "Password"
+        ],
+        "authenticationRequirement": "singleFactorAuthentication",
+        "signInIdentifier": "vuser7@axgile.com",
+        "signInIdentifierType": "userPrincipalName",
+        "servicePrincipalName": "",
+        "signInEventTypes": [
+            "interactiveUser"
+        ],
+        "servicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "federatedCredentialId": "",
+        "userType": "member",
+        "flaggedForReview": false,
+        "isTenantRestricted": false,
+        "autonomousSystemNumber": 65356,
+        "crossTenantAccessType": "none",
+        "servicePrincipalCredentialKeyId": "",
+        "servicePrincipalCredentialThumbprint": "",
+        "uniqueTokenIdentifier": "a1844b8d098e49539098dfb21bdda41d",
+        "incomingTokenType": "none",
+        "authenticationProtocol": "oAuth2",
+        "resourceServicePrincipalId": "00000000-0000-0000-0000-000000000000",
+        "signInTokenProtectionStatus": "none",
+        "originalTransferMethod": "none",
+        "isThroughGlobalSecureAccess": false,
+        "globalSecureAccessIpAddress": null,
+        "conditionalAccessAudiences": [
+            "00000002-0000-0000-c000-000000000000"
+        ],
+        "sessionId": "ce64b734-0232-4dde-890d-1564bfba3279",
+        "appOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "resourceOwnerTenantId": "00000000-0000-0000-0000-000000000000",
+        "mfaDetail": null,
+        "authenticationAppDeviceDetails": null,
+        "agent": {
+            "agentType": "notAgentic",
+            "parentAppId": ""
+        },
+        "status": {
+            "errorCode": 0,
+            "failureReason": "Other.",
+            "additionalDetails": null
+        },
+        "deviceDetail": {
+            "deviceId": "37b1cfee-401f-4e06-97e3-82f2d1137444",
+            "displayName": "vuser7's Device",
+            "operatingSystem": "Windows 11",
+            "browser": "Edge 120.0",
+            "isCompliant": true,
+            "isManaged": false,
+            "trustType": "AzureAD"
+        },
+        "location": {
+            "city": "Austin",
+            "state": "Texas",
+            "countryOrRegion": "US",
+            "geoCoordinates": {
+                "altitude": null,
+                "latitude": 30.2672,
+                "longitude": -97.7431
+            }
+        },
+        "appliedConditionalAccessPolicies": [],
+        "authenticationContextClassReferences": [],
+        "authenticationProcessingDetails": [
+            {
+                "key": "Is CAE Token",
+                "value": "False"
+            }
+        ],
+        "networkLocationDetails": [],
+        "authenticationDetails": [
+            {
+                "authenticationMethod": "Password",
+                "authenticationMethodDetail": "UsernamePassword",
+                "authenticationStepDateTime": "2025-10-01T15:41:05Z",
+                "authenticationStepRequirement": "primary",
+                "succeeded": true
+            }
+        ],
+        "authenticationRequirementPolicies": [],
+        "sessionLifetimePolicies": [],
+        "privateLinkDetails": {
+            "policyId": "",
+            "policyName": "",
+            "resourceId": "",
+            "policyTenantId": ""
+        },
+        "appliedEventListeners": [],
+        "authenticationAppPolicyEvaluationDetails": [],
+        "managedServiceIdentity": {
+            "msiType": "none",
+            "associatedResourceId": "",
+            "federatedTokenId": "",
+            "federatedTokenIssuer": ""
+        },
+        "tokenProtectionStatusDetails": {
+            "signInSessionStatus": "none",
+            "signInSessionStatusCode": null
+        }
+    }
+]
