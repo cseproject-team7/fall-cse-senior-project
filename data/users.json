@@ -1,0 +1,51 @@
+[
+    {
+        "id": "438fe94d-6865-4b88-86fa-7e9287e35a27",
+        "displayName": "vuser1",
+        "userPrincipalName": "vuser1@axgile.com",
+        "password": "mWuof-15j1MiLvnO",
+        "source": "LOCAL"
+    },
+    {
+        "id": "f259928c-5c1e-4792-84c0-01e54cf3fc1f",
+        "displayName": "vuser2",
+        "userPrincipalName": "vuser2@axgile.com",
+        "password": "7S09jKG-xF5iIs_X",
+        "source": "LOCAL"
+    },
+    {
+        "id": "ed524d0b-59bf-45f6-86e0-9209516c7879",
+        "displayName": "vuser3",
+        "userPrincipalName": "vuser3@axgile.com",
+        "password": "950Re6Cz_0JRoUsx",
+        "source": "LOCAL"
+    },
+    {
+        "id": "32e2093e-58b3-424f-9a6a-42a125fba9e2",
+        "displayName": "vuser4",
+        "userPrincipalName": "vuser4@axgile.com",
+        "password": "fx6qRLamypJr9Ngk",
+        "source": "LOCAL"
+    },
+    {
+        "id": "e561e43c-695e-4cad-8e0b-2f1cf1b75ea5",
+        "displayName": "vuser5",
+        "userPrincipalName": "vuser5@axgile.com",
+        "password": "NETJiUmle5SZR9ec",
+        "source": "LOCAL"
+    },
+    {
+        "id": "41a8e355-2832-4b97-b9a7-d4c30781c7cf",
+        "displayName": "vuser6",
+        "userPrincipalName": "vuser6@axgile.com",
+        "password": "VbF4iPpTimf8hr7s",
+        "source": "LOCAL"
+    },
+    {
+        "id": "d232a0a7-68ba-4d91-b4a5-ad36ac29e1ee",
+        "displayName": "vuser7",
+        "userPrincipalName": "vuser7@axgile.com",
+        "password": "xyPw1puYqCn9Zhgs",
+        "source": "LOCAL"
+    }
+]

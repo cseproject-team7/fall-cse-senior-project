@@ -12,6 +12,11 @@ CREATOR_APP = {
     "tenant_id": "TENANT_ID"
 }
 
+# Toggle between talking to the real tenant ("REAL") and ("LOCAL")
+# CREATION_MODE = os.getenv("USER_CREATION_MODE", "REAL").strip().upper()  # REAL
+CREATION_MODE = os.getenv("USER_CREATION_MODE", "LOCAL").strip().upper() # LOCAL
+VALID_CREATION_MODES = {"REAL", "LOCAL"}
+
 # Define all the users you want to create here
 USERS_TO_CREATE = [
     {
@@ -21,7 +26,8 @@ USERS_TO_CREATE = [
     },
 ]
 
-OUTPUT_FILE = "users.json"
+OUTPUT_DIR = os.path.join("data")
+OUTPUT_FILE = os.path.join(OUTPUT_DIR, "users.json")
 
 # -----------------------------
 # Helper Functions
@@ -92,11 +98,13 @@ def create_users(access_token):
                 "id": user_id,
                 "displayName": user_details["displayName"],
                 "userPrincipalName": user_details["userPrincipalName"],
-                "password": user_details["password"]
+                "password": user_details["password"],
+                "source": "REAL"
             })
 
     if created_users_data:
         try:
+            os.makedirs(OUTPUT_DIR, exist_ok=True)
             with open(OUTPUT_FILE, 'w') as f:
                 json.dump(created_users_data, f, indent=4)
             print(f"\nSuccessfully wrote {len(created_users_data)} user(s) to {OUTPUT_FILE}")
@@ -107,6 +115,50 @@ def create_users(access_token):
 
 def main():
     """Main function to drive the script."""
+    if CREATION_MODE not in VALID_CREATION_MODES:
+        print(f"[ERROR] Invalid CREATION_MODE '{CREATION_MODE}'. Choose from {sorted(VALID_CREATION_MODES)}.")
+        return
+
+    if CREATION_MODE == "LOCAL":
+        print("Running in LOCAL mode: skipping Microsoft Graph calls and generating stub users.")
+        from helper_create_vusers_local import generate_local_user_stubs
+
+        existing_users_data = []
+        if os.path.exists(OUTPUT_FILE):
+            try:
+                with open(OUTPUT_FILE, 'r') as f:
+                    existing_users_data = json.load(f)
+            except (IOError, json.JSONDecodeError) as e:
+                print(f"[WARNING] Could not read existing user file {OUTPUT_FILE}: {e}. Proceeding with empty list.")
+                existing_users_data = []
+
+        result = generate_local_user_stubs(existing_users_data)
+        if result is None:
+            return
+
+        new_local_users = result["new_users"]
+        reset_requested = result["reset_requested"]
+
+        if reset_requested:
+            retained_users = [
+                user for user in existing_users_data if user.get("source") != "LOCAL"
+            ]
+        else:
+            retained_users = list(existing_users_data)
+
+        final_users = retained_users + new_local_users
+
+        try:
+            os.makedirs(OUTPUT_DIR, exist_ok=True)
+            with open(OUTPUT_FILE, 'w') as f:
+                json.dump(final_users, f, indent=4)
+            print(
+                f"\nSuccessfully wrote {len(new_local_users)} new local user stub(s) to {OUTPUT_FILE}. Total records: {len(final_users)}"
+            )
+        except IOError as e:
+            print(f"[ERROR] Could not write to file {OUTPUT_FILE}: {e}")
+        return
+
     token = get_access_token(
         CREATOR_APP["client_id"],
         CREATOR_APP["client_secret"],

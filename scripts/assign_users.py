@@ -27,7 +27,7 @@ TARGET_APPS = [
     }
 ]
 
-INPUT_FILE = "users.json"
+INPUT_FILE = os.path.join("data", "users.json")
 OUTPUT_FILE = "assignments.json"
 
 # -----------------------------
@@ -144,4 +144,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
