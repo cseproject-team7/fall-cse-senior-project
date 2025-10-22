@@ -1,0 +1,25 @@
+{
+  "name": "usf-authentication-prediction-server",
+  "version": "1.0.0",
+  "description": "Backend proxy server for Azure ML authentication prediction endpoint",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "azure",
+    "ml",
+    "prediction",
+    "authentication"
+  ],
+  "author": "Team 7",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
+  }
+}
+

@@ -1,0 +1,39 @@
+const eventHubService = require('../services/eventHubService');
+
+// Get list of available personas
+exports.getPersonas = async (req, res) => {
+  try {
+    const personas = await eventHubService.getPersonas();
+    res.json({ success: true, personas });
+  } catch (error) {
+    console.error('Error fetching personas:', error.message);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+};
+
+// Get logs filtered by persona
+exports.getLogsByPersona = async (req, res) => {
+  try {
+    const { persona } = req.params;
+    const limit = parseInt(req.query.limit) || 50;
+    
+    const logs = await eventHubService.getLogsByPersona(persona, limit);
+    
+    res.json({ 
+      success: true, 
+      persona,
+      count: logs.length,
+      logs 
+    });
+  } catch (error) {
+    console.error('Error fetching logs:', error.message);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+};
+
