@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Serve static files from React app
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // API routes
 app.use('/api', apiRoutes);
