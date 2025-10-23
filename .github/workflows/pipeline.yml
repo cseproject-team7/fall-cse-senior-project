@@ -1,28 +1,28 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
- 
+
 name: Build and deploy Node.js app to Azure Web App - usf-autentication-prediction
- 
+
 on:
   push:
     branches:
       - master
   workflow_dispatch:
- 
+
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
       contents: read #This is required for actions/checkout
- 
+
     steps:
       - uses: actions/checkout@v4
- 
+
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
           node-version: '22.x'
- 
+
       - name: Build Client and Install Server Dependencies
         run: |
           # 1. Build React client
@@ -35,22 +35,24 @@ jobs:
           echo "Installing server dependencies..."
           cd ../server
           npm install --only=production
- 
+
+          # 3. Move client build into server's 'public' folder
+          # (This assumes your Express server serves static files from './public')
+          echo "Moving client build to server/public..."
+          mv ../client/build ./public
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: |
-            server/
-            client/build/
- 
+          # Only upload the server folder, which now contains the client build
+          path: server/
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    permissions:
-      id-token: write #This is required for requesting the JWT
-      contents: read #This is required for actions/checkout
-    
+    # No special 'permissions' block needed for Service Principal secret login
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -60,14 +62,19 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.__clientidsecretname__ }}
-          tenant-id: ${{ secrets.__tenantidsecretname__ }}
-          subscription-id: ${{ secrets.__subscriptionidsecretname__ }}
- 
+          # This tells Azure we are using a secret, not OIDC
+          auth-type: SERVICE_PRINCIPAL
+          # These MUST match the secret names you created in GitHub
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'usf-autentication-prediction'
+          # Use the secret you created for the app name
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
-          package: . # The '.' correctly points to the root of the downloaded artifact
+          # '.' deploys the contents of the downloaded artifact (the 'server' folder)
+          package: .
