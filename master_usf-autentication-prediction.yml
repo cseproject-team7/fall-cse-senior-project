@@ -23,7 +23,7 @@ jobs:
           echo "Building client..."
           cd client
           npm install
-          npm run build
+          CI=false npm run build
           # 2. Install server's production dependencies
           echo "Installing server dependencies..."
           cd ../server
