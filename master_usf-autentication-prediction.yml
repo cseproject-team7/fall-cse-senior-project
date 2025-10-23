@@ -18,18 +18,16 @@ jobs:
         with:
           node-version: '22.x'
       - name: Build Client and Install Server Dependencies
-        env:
-          CI: false
         run: |
           # 1. Build React client
           echo "Building client..."
           cd client
           npm install
-          npm run build
+          CI=false npm run build
           # 2. Install server's production dependencies
           echo "Installing server dependencies..."
           cd ../server
-          npm install --only=production
+          CI=false npm install --only=production
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
