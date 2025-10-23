@@ -18,6 +18,8 @@ jobs:
         with:
           node-version: '22.x'
       - name: Build Client and Install Server Dependencies
+        env:
+          CI: false
         run: |
           # 1. Build React client
           echo "Building client..."
