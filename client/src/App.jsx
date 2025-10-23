@@ -16,14 +16,14 @@ function App() {
   // Fetch available personas on mount
   useEffect(() => {
     fetchPersonas();
-  }, []);
+  }, [fetchPersonas]);
 
   // Fetch logs when persona changes
   useEffect(() => {
     if (selectedPersona) {
       fetchLogs(selectedPersona);
     }
-  }, [selectedPersona]);
+  }, [fetchLogs, selectedPersona]);
 
   const fetchPersonas = async () => {
     try {
