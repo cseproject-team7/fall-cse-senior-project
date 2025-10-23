@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CI: false
     permissions:
       contents: read #This is required for actions/checkout
     steps:
@@ -23,11 +25,11 @@ jobs:
           echo "Building client..."
           cd client
           npm install
-          CI=false npm run build
+          npm run build
           # 2. Install server's production dependencies
           echo "Installing server dependencies..."
           cd ../server
-          CI=false npm install --only=production
+          npm install --only=production
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
