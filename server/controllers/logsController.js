@@ -18,14 +18,23 @@ exports.getPersonas = async (req, res) => {
 exports.getLogsByPersona = async (req, res) => {
   try {
     const { persona } = req.params;
-    const limit = parseInt(req.query.limit) || 50;
+    const rawLimit = req.query.limit;
     
-    const logs = await eventHubService.getLogsByPersona(persona, limit);
+    let limit;
+    if (!rawLimit || rawLimit === 'all') {
+      limit = null;
+    } else {
+      const parsed = parseInt(rawLimit, 10);
+      limit = Number.isNaN(parsed) || parsed <= 0 ? 50 : parsed;
+    }
+    
+    const { logs, total } = await eventHubService.getLogsByPersona(persona, limit);
     
     res.json({ 
       success: true, 
       persona,
       count: logs.length,
+      total,
       logs 
     });
   } catch (error) {
@@ -36,4 +45,3 @@ exports.getLogsByPersona = async (req, res) => {
     });
   }
 };
-

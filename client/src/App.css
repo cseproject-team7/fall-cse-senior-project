@@ -120,6 +120,54 @@
   border-radius: 1rem;
   font-size: 0.875rem;
   font-weight: 500;
+  color: #EDEBD1;
+}
+
+.section-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logs-limit-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(237, 235, 209, 0.2);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  color: #006747;
+  font-size: 0.875rem;
+}
+
+.logs-limit-control label {
+  font-weight: 600;
+  color: #EDEBD1;
+}
+
+.logs-limit-control select {
+  border: 1px solid #CFC493;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  background: white;
+  color: #006747;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.logs-limit-suffix {
+  font-weight: 500;
+  color: #EDEBD1;
+}
+
+.logs-limit-control select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(207, 196, 147, 0.3);
+}
+
+.logs-limit-control select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* Cards */
@@ -130,7 +178,9 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   min-height: 400px;
   max-height: 600px;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .logs-card {
@@ -157,6 +207,25 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 1.5rem;
+  flex: 1;
+}
+
+.logs-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.logs-list::-webkit-scrollbar-track {
+  background: rgba(237, 235, 209, 0.7);
+  border-radius: 999px;
+  margin: 0.5rem 0.25rem;
+}
+
+.logs-list::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 103, 71, 0.3);
+  border-radius: 999px;
 }
 
 .log-item {
@@ -215,6 +284,24 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 1.5rem;
+}
+
+.predictions-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.predictions-list::-webkit-scrollbar-track {
+  background: rgba(207, 196, 147, 0.6);
+  border-radius: 999px;
+  margin: 0.5rem 0.25rem;
+}
+
+.predictions-list::-webkit-scrollbar-thumb {
+  background-color: rgba(207, 196, 147, 0.4);
+  border-radius: 999px;
 }
 
 .prediction-item {

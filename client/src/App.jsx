@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import { normalizePredictions } from './utils/predictionFormatter';
 
@@ -7,6 +7,8 @@ function App() {
   const [selectedPersona, setSelectedPersona] = useState('');
   const [logs, setLogs] = useState([]);
   const [predictions, setPredictions] = useState([]);
+  const [logsLimit, setLogsLimit] = useState('all');
+  const [totalLogs, setTotalLogs] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -14,58 +16,22 @@ function App() {
     ? window.location.origin 
     : '';
 
-  // Fetch available personas on mount
-  useEffect(() => {
-    fetchPersonas();
-  }, []);
+  const limitOptions = ['all', '5', '10', '20', '50'];
 
-  // Fetch logs when persona changes
-  useEffect(() => {
-    if (selectedPersona) {
-      fetchLogs(selectedPersona);
-    }
-  }, [selectedPersona]);
-
-  const fetchPersonas = async () => {
+  const fetchPersonas = useCallback(async () => {
     try {
       const response = await fetch(`${API_BASE}/api/logs/personas`);
       const data = await response.json();
       if (data.success) {
         setPersonas(data.personas);
-        if (data.personas.length > 0) {
-          setSelectedPersona(data.personas[0]);
-        }
+        setSelectedPersona((current) => current || data.personas[0] || '');
       }
     } catch (err) {
       console.error('Error fetching personas:', err);
     }
-  };
+  }, [API_BASE]);
 
-  const fetchLogs = async (persona) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(`${API_BASE}/api/logs/${persona}`);
-      const data = await response.json();
-      
-      if (data.success) {
-        setLogs(data.logs);
-        // Auto-generate predictions for the logs
-        if (data.logs.length > 0) {
-          await generatePredictions(data.logs);
-        }
-      } else {
-        setError(data.error);
-      }
-    } catch (err) {
-      console.error('Error fetching logs:', err);
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const generatePredictions = async (logData) => {
+  const generatePredictions = useCallback(async (logData) => {
     try {
       const response = await fetch(`${API_BASE}/api/predict`, {
         method: 'POST',
@@ -82,12 +48,74 @@ function App() {
         setPredictions(normalized);
       } else {
         setError(data.error);
+        setPredictions([]);
       }
     } catch (err) {
       console.error('Prediction error:', err);
       setError(err.message);
+      setPredictions([]);
     }
-  };
+  }, [API_BASE]);
+
+  const fetchLogs = useCallback(async (persona, limitOverride) => {
+    const effectiveLimit = limitOverride ?? logsLimit;
+    const limitQuery = effectiveLimit === 'all'
+      ? 'all'
+      : Number(effectiveLimit);
+
+    setLoading(true);
+    setError(null);
+    setPredictions([]);
+    try {
+      const response = await fetch(
+        `${API_BASE}/api/logs/${persona}?limit=${limitQuery}`
+      );
+      const data = await response.json();
+      
+      if (data.success) {
+        setLogs(data.logs);
+        const totalFromResponse = typeof data.total === 'number'
+          ? data.total
+          : typeof data.count === 'number'
+            ? data.count
+            : Array.isArray(data.logs)
+              ? data.logs.length
+              : 0;
+        setTotalLogs(totalFromResponse);
+        // Auto-generate predictions for the logs
+        if (data.logs.length > 0) {
+          await generatePredictions(data.logs);
+        } else {
+          setPredictions([]);
+        }
+      } else {
+        setError(data.error);
+        setLogs([]);
+        setPredictions([]);
+        setTotalLogs(0);
+      }
+    } catch (err) {
+      console.error('Error fetching logs:', err);
+      setError(err.message);
+      setLogs([]);
+      setPredictions([]);
+      setTotalLogs(0);
+    } finally {
+      setLoading(false);
+    }
+  }, [API_BASE, generatePredictions, logsLimit]);
+
+  // Fetch available personas on mount
+  useEffect(() => {
+    fetchPersonas();
+  }, [fetchPersonas]);
+
+  // Fetch logs when persona or limit changes
+  useEffect(() => {
+    if (selectedPersona) {
+      fetchLogs(selectedPersona);
+    }
+  }, [selectedPersona, fetchLogs]);
 
   const formatHour = (hour) => {
     const h = hour % 12 || 12;
@@ -98,6 +126,10 @@ function App() {
   const formatWeekday = (day) => {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     return days[day] || day;
+  };
+
+  const handleLimitChange = (event) => {
+    setLogsLimit(event.target.value);
   };
 
   return (
@@ -138,7 +170,29 @@ function App() {
           <div className="section">
             <div className="section-header">
               <h2>📊 Input Activity Logs</h2>
-              <span className="count-badge">{logs.length} logs</span>
+              <div className="section-actions">
+                <span className="count-badge">
+                  {totalLogs} logs
+                </span>
+                <div className="logs-limit-control">
+                  <label htmlFor="logs-limit">Show</label>
+                  <select
+                    id="logs-limit"
+                    value={logsLimit}
+                    onChange={handleLimitChange}
+                    disabled={loading}
+                  >
+                    {limitOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option === 'all' ? 'All' : option}
+                      </option>
+                    ))}
+                  </select>
+                  <span className="logs-limit-suffix">
+                    {logsLimit === 'all' ? 'logs (all)' : 'logs'}
+                  </span>
+                </div>
+              </div>
             </div>
             <div className="card logs-card">
               {loading ? (
