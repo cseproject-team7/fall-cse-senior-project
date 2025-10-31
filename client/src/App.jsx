@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { normalizePredictions } from './utils/predictionFormatter';
 
 function App() {
   const [personas, setPersonas] = useState([]);
@@ -75,7 +76,10 @@ function App() {
       const data = await response.json();
       
       if (data.success) {
-        setPredictions(data.prediction ? [data.prediction] : []);
+        const normalized = data.prediction
+          ? normalizePredictions(data.prediction)
+          : [];
+        setPredictions(normalized);
       } else {
         setError(data.error);
       }
@@ -177,14 +181,46 @@ function App() {
                 <div className="empty-state">No predictions available</div>
               ) : (
                 <div className="predictions-list">
-                  {predictions.map((pred, index) => (
-                    <div key={index} className="prediction-item">
-                      <div className="prediction-label">Predicted Next App:</div>
-                      <div className="prediction-value">{pred.pred_app}</div>
+                  {predictions.map((pred) => (
+                    <div key={pred.id} className="prediction-item">
+                      <div className="prediction-header">
+                        <span className="prediction-app">{pred.title}</span>
+                        {pred.time && (
+                          <span className="prediction-time">{pred.time}</span>
+                        )}
+                      </div>
+
+                      {(pred.subtitle || pred.meta.length > 0) && (
+                        <div className="prediction-details">
+                          {pred.subtitle && (
+                            <span className="prediction-subtitle">
+                              {pred.subtitle}
+                            </span>
+                          )}
+                          {pred.meta.length > 0 && (
+                            <div className="prediction-meta">
+                              {pred.meta.map((item, metaIndex) => (
+                                <div
+                                  key={`${pred.id}-meta-${metaIndex}`}
+                                  className="prediction-meta-item"
+                                >
+                                  <span className="meta-label">
+                                    {item.label}
+                                  </span>
+                                  <span className="meta-value">
+                                    {item.value}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      )}
+
                       <div className="prediction-raw">
                         <details>
                           <summary>View Raw Response</summary>
-                          <pre>{JSON.stringify(pred, null, 2)}</pre>
+                          <pre>{pred.rawText}</pre>
                         </details>
                       </div>
                     </div>
