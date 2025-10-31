@@ -98,6 +98,12 @@
 
 .section {
   min-width: 0; /* Prevent grid blowout */
+  display: flex;
+  flex-direction: column;
+}
+
+.section .card {
+  flex: 1;
 }
 
 .section-header {
@@ -287,6 +293,8 @@
   max-height: 480px;
   overflow-y: auto;
   padding-right: 1.5rem;
+  flex: 1;
+  min-height: 0;
 }
 
 .predictions-list::-webkit-scrollbar {
