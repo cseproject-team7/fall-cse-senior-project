@@ -96,6 +96,18 @@ function App() {
     return days[day] || day;
   };
 
+  // const fetchLogs = async () => {
+  //   try {
+  //       const response = await axios.get('http://localhost:3001/api/logs'); 
+  //       setLogs(response.data); 
+  //   } catch (err) {
+  //       setError(err.message);
+  //       console.error("Failed to fetch logs:", err);
+  //   } finally {
+  //       setIsLoading(false);
+  //   }
+  // };
+
   return (
     <div className="App">
       <div className="container">
