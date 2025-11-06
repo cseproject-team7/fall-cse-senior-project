@@ -20,3 +20,11 @@ code {
     monospace;
 }
 
+/* Makes the main content area start *after* the sidebar
+  and adds some padding.
+*/
+.main-content {
+  margin-left: 200px; /* This MUST match your sidebar width */
+  padding: 20px;
+  width: calc(100% - 200px);
+}
