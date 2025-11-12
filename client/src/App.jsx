@@ -135,7 +135,7 @@ function App() {
 
         {error && (
           <div className="error-box">
-            <h3>❌ Error</h3>
+            <h3>Error</h3>
             <p>{error}</p>
           </div>
         )}
@@ -145,7 +145,7 @@ function App() {
           {/* Input Logs Section */}
           <div className="section">
             <div className="section-header">
-              <h2>📊 Input Activity Logs</h2>
+              <h2>Input Activity Logs</h2>
               <span className="count-badge">{logs.length} logs</span>
             </div>
             <div className="card logs-card">
@@ -179,7 +179,7 @@ function App() {
           {/* Predictions Section */}
           <div className="section">
             <div className="section-header">
-              <h2>🎯 ML Predictions</h2>
+              <h2>ML Predictions</h2>
               <span className="count-badge">{predictions.length} predictions</span>
             </div>
             <div className="card predictions-card">
