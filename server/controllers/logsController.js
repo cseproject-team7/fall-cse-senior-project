@@ -59,14 +59,14 @@ exports.getLogsByPersona = async (req, res) => {
   }
 };
 
-// === NEW FUNCTION 1: Get All Logs for Dashboard ===
+// === FUNCTION 1: Get All Logs for Dashboard (Now sorted by time) ===
 exports.getAllLogs = async (req, res) => {
     
-    const containerName = "your-container-name"; // <--- ⚠️ UPDATE THIS
+    const containerName = "json-signin-logs"; // Your container name
     const containerClient = blobServiceClient.getContainerClient(containerName);
 
     try {
-        let formattedLogs = []; 
+        let allLogs = []; // 1. Create a temporary array to hold raw logs
 
         for await (const blob of containerClient.listBlobsFlat()) {
             if (blob.name.endsWith('.json')) {
@@ -82,17 +82,12 @@ exports.getAllLogs = async (req, res) => {
                         const outerLog = JSON.parse(line);
                         const innerLog = JSON.parse(outerLog.Body);
                         
-                        const d = new Date(innerLog.createdDateTime);
-                        const date = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
-                        const minutes = d.getMinutes().toString().padStart(2, '0');
-                        const time = `${d.getHours()}:${minutes}`;
-                        
-                        formattedLogs.push({
+                        // 2. Push the raw log data, including the sort key
+                        allLogs.push({
                             userPrincipalName: innerLog.userPrincipalName,
                             userId: innerLog.userId,
                             appDisplayName: innerLog.appDisplayName,
-                            date: date,
-                            time: time
+                            createdDateTime: innerLog.createdDateTime // <-- ESSENTIAL for sorting
                         });
                     } catch (e) {
                         console.error(`Failed to parse a line: ${e.message}`);
@@ -100,18 +95,46 @@ exports.getAllLogs = async (req, res) => {
                 });
             }
         }
+
+        // 3. --- THIS IS THE NEW SORTING LOGIC ---
+        // We sort by 'createdDateTime' in descending order (newest first)
+        allLogs.sort((a, b) => {
+            return new Date(b.createdDateTime) - new Date(a.createdDateTime);
+        });
+
+        // 4. --- THIS IS THE NEW FORMATTING LOGIC ---
+        // Loop over the now-sorted array and create the final strings
+        const formattedLogs = allLogs.map(log => {
+            const d = new Date(log.createdDateTime);
+            const date = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+            const minutes = d.getMinutes().toString().padStart(2, '0');
+            const time = `${d.getHours()}:${minutes}`;
+            
+            return {
+                userPrincipalName: log.userPrincipalName,
+                userId: log.userPrincipalName, // Corrected from your old code
+                appDisplayName: log.appDisplayName,
+                date: date,
+                time: time
+            };
+        });
+
+        // 5. Send the sorted and formatted logs
         res.json(formattedLogs);
+
     } catch (error) {
         console.error(error);
         res.status(500).send({ message: "Error fetching logs", error: error.message });
     }
 };
 
-
-// === NEW FUNCTION 2: Get Log Patterns for Dashboard ===
+// === 
+//      FUNCTION 2: (REPLACE THIS) Get Log Patterns for Dashboard 
+//      This is the new version that counts full sessions (3+ apps)
+// ===
 exports.getLogPatterns = async (req, res) => {
     
-    const containerName = "your-container-name"; // <--- ⚠️ UPDATE THIS
+    const containerName = "json-signin-logs"; // Your container name
     const containerClient = blobServiceClient.getContainerClient(containerName);
 
     let rawLogs = [];
@@ -141,39 +164,57 @@ exports.getLogPatterns = async (req, res) => {
             }
         }
 
-        // 2. Sort all logs by user, then by time
+        // 2. Sort all logs by user, then by time (Essential for finding patterns)
         rawLogs.sort((a, b) => {
             if (a.userId < b.userId) return -1;
             if (a.userId > b.userId) return 1;
             return new Date(a.createdDateTime) - new Date(b.createdDateTime);
         });
 
-        // 3. Count the patterns
-        const patternCounts = {};
-        for (let i = 0; i < rawLogs.length - 1; i++) {
-            if (rawLogs[i].userId === rawLogs[i + 1].userId) {
-                let fromApp = rawLogs[i].appDisplayName;
-                let toApp = rawLogs[i + 1].appDisplayName;
-
-                if (fromApp === "MyUSF (OASIS)") fromApp = "MyUSF";
-                if (toApp === "MyUSF (OASIS)") toApp = "MyUSF";
-                
-                if (fromApp !== toApp) {
-                    const pattern = `${fromApp} → ${toApp}`;
-                    patternCounts[pattern] = (patternCounts[pattern] || 0) + 1;
-                }
+        // 3. Group logs by user into sessions
+        const userSessions = {};
+        rawLogs.forEach(log => {
+            if (!userSessions[log.userId]) {
+                userSessions[log.userId] = []; // Create a new list
             }
-        }
+            
+            let appName = log.appDisplayName;
+            if (appName === "MyUSF (OASIS)") appName = "MyUSF";
 
-        // 4. Format for Recharts
+            userSessions[log.userId].push(appName);
+        });
+
+        // 4. Count the frequency of full session patterns
+        const patternCounts = {};
+        
+        Object.values(userSessions).forEach(sessionArray => {
+            
+            // Filter out consecutive duplicates (e.g., [A, A, B] -> [A, B])
+            const filteredSession = sessionArray.filter((app, index) => {
+                return index === 0 || app !== sessionArray[index - 1];
+            });
+
+            // If the user's session is less than 2 apps, skip it
+            if (filteredSession.length < 2) {
+                return;
+            }
+
+            // Create the full pattern string (e.g., "GitHub → Canvas → MATLAB")
+            const pattern = filteredSession.join(' → '); 
+            
+            // Count this full pattern
+            patternCounts[pattern] = (patternCounts[pattern] || 0) + 1;
+        });
+
+        // 5. Format for Recharts
         let chartData = Object.keys(patternCounts).map(patternName => ({
             name: patternName,
             count: patternCounts[patternName]
         }));
 
-        // 5. Sort and send top 15
+        // 6. Sort to rank by frequency and send ALL patterns
         chartData.sort((a, b) => b.count - a.count);
-        res.json(chartData.slice(0, 15));
+        res.json(chartData); // We removed .slice(0, 15)
 
     } catch (error) {
         console.error(error);
