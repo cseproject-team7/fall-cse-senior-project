@@ -75,7 +75,8 @@ function App() {
       const data = await response.json();
       
       if (data.success) {
-        setPredictions(data.prediction ? [data.prediction] : []);
+        // Local ML returns predictions array with top 5 apps
+        setPredictions(data.prediction?.predictions || []);
       } else {
         setError(data.error);
       }
@@ -179,8 +180,8 @@ function App() {
           {/* Predictions Section */}
           <div className="section">
             <div className="section-header">
-              <h2>ML Predictions</h2>
-              <span className="count-badge">{predictions.length} predictions</span>
+              <h2>Next App Predictions</h2>
+              <span className="count-badge">Top {predictions.length} predictions</span>
             </div>
             <div className="card predictions-card">
               {loading ? (
@@ -190,15 +191,32 @@ function App() {
               ) : (
                 <div className="predictions-list">
                   {predictions.map((pred, index) => (
-                    <div key={index} className="prediction-item">
-                      <div className="prediction-label">Predicted Next App:</div>
-                      <div className="prediction-value">{pred.pred_app}</div>
-                      <div className="prediction-raw">
-                        <details>
-                          <summary>View Raw Response</summary>
-                          <pre>{JSON.stringify(pred, null, 2)}</pre>
-                        </details>
+                    <div key={index} className="prediction-item" style={{
+                      borderLeft: index === 0 ? '4px solid #006747' : '3px solid #CFC493'
+                    }}>
+                      <div className="prediction-header">
+                        <span className="prediction-rank">#{pred.rank || index + 1}</span>
+                        <span className="prediction-app-name">{pred.app}</span>
                       </div>
+                      <div className="confidence-container">
+                        <div className="confidence-bar-bg">
+                          <div 
+                            className="confidence-bar-fill" 
+                            style={{ 
+                              width: `${(pred.confidence * 100)}%`,
+                              background: index === 0 ? '#006747' : '#CFC493'
+                            }}
+                          />
+                        </div>
+                        <span className="confidence-text">
+                          {(pred.confidence * 100).toFixed(1)}% confidence
+                        </span>
+                      </div>
+                      {index === 0 && (
+                        <div className="top-prediction-badge">
+                          🏆 Most Likely
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
