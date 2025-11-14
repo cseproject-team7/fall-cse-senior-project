@@ -212,10 +212,9 @@ exports.getLogPatterns = async (req, res) => {
             count: patternCounts[patternName]
         }));
 
-        // 6. Sort to rank by frequency and send ALL patterns
+        // 6. Sort to rank by frequency and send just the TOP 10
         chartData.sort((a, b) => b.count - a.count);
-        res.json(chartData); // We removed .slice(0, 15)
-
+        res.json(chartData.slice(0,10)); 
     } catch (error) {
         console.error(error);
         res.status(500).send({ message: "Error fetching patterns", error: error.message });
