@@ -3,10 +3,13 @@ const { BlobServiceClient } = require('@azure/storage-blob');
 
 // Get connection string from .env
 const connectionString = process.env.AZURE_STORAGE_CONNECTION_STRING;
+let blobServiceClient = null;
+
 if (!connectionString) {
-    console.error("Azure Storage Connection String not found in .env file");
+    console.warn("⚠️  Azure Storage Connection String not found in .env file - blob storage features will be disabled");
+} else {
+    blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
 }
-const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString);
 
 // Helper function to convert a stream to a string
 async function streamToString(readableStream) {
@@ -61,6 +64,12 @@ exports.getLogsByPersona = async (req, res) => {
 
 // === FUNCTION 1: Get All Logs for Dashboard (Now sorted by time) ===
 exports.getAllLogs = async (req, res) => {
+    if (!blobServiceClient) {
+        return res.status(503).json({
+            success: false,
+            error: 'Azure Storage not configured'
+        });
+    }
     
     const containerName = "json-signin-logs"; // Your container name
     const containerClient = blobServiceClient.getContainerClient(containerName);
@@ -133,6 +142,12 @@ exports.getAllLogs = async (req, res) => {
 //      This is the new version that counts full sessions (3+ apps)
 // ===
 exports.getLogPatterns = async (req, res) => {
+    if (!blobServiceClient) {
+        return res.status(503).json({
+            success: false,
+            error: 'Azure Storage not configured'
+        });
+    }
     
     const containerName = "json-signin-logs"; // Your container name
     const containerClient = blobServiceClient.getContainerClient(containerName);
