@@ -23,6 +23,7 @@ const express = require('express');
 const router = express.Router();
 const predictionController = require('../controllers/predictionController');
 const logsController = require('../controllers/logsController');
+const mlPredictionController = require('../controllers/mlPredictionController');
 
 // Health check
 router.get('/health', (req, res) => {
@@ -37,7 +38,11 @@ router.get('/logs/:persona', logsController.getLogsByPersona);
 router.get('/logs', logsController.getAllLogs); // Fetches all logs
 router.get('/patterns', logsController.getLogPatterns); // Fetches sequence patterns
 
-// Prediction endpoint
+// Prediction endpoint (Azure ML)
 router.post('/predict', predictionController.predict);
+
+// === ML Prediction endpoints (local models) ===
+router.post('/predict-next-app', mlPredictionController.predictNextApp);
+router.post('/predict-persona', mlPredictionController.predictPersona);
 
 module.exports = router;

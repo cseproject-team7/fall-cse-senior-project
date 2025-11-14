@@ -143,7 +143,28 @@ function LogDashboard() {
                           dataKey="name" 
                           type="category" 
                           stroke="#f5f5f5" 
-                          width={150} // Give space for long labels
+                          width={200}
+                          tick={({ x, y, payload }) => {
+                            const text = payload.value;
+                            const maxLength = 25; // Max characters before ellipsis
+                            const displayText = text.length > maxLength 
+                              ? text.substring(0, maxLength) + '...' 
+                              : text;
+                            return (
+                              <g transform={`translate(${x},${y})`}>
+                                <text 
+                                  x={0} 
+                                  y={0} 
+                                  dy={4} 
+                                  textAnchor="end" 
+                                  fill="#f5f5f5"
+                                  fontSize={12}
+                                >
+                                  {displayText}
+                                </text>
+                              </g>
+                            );
+                          }}
                         />
                         
                         <Tooltip 
