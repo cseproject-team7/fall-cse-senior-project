@@ -62,7 +62,7 @@ exports.getLogsByPersona = async (req, res) => {
   }
 };
 
-// === FUNCTION 1: Get All Logs for Dashboard (Now sorted by time) ===
+// === FUNCTION 1: Get All Logs for Dashboard (Sorted by Time) ===
 exports.getAllLogs = async (req, res) => {
     if (!blobServiceClient) {
         return res.status(503).json({
@@ -105,14 +105,12 @@ exports.getAllLogs = async (req, res) => {
             }
         }
 
-        // 3. --- THIS IS THE NEW SORTING LOGIC ---
-        // We sort by 'createdDateTime' in descending order (newest first)
+        // 3. --- Sort all logs by time ---
         allLogs.sort((a, b) => {
             return new Date(b.createdDateTime) - new Date(a.createdDateTime);
         });
 
-        // 4. --- THIS IS THE NEW FORMATTING LOGIC ---
-        // Loop over the now-sorted array and create the final strings
+        // 4. --- Format the logs *after* sorting ---
         const formattedLogs = allLogs.map(log => {
             const d = new Date(log.createdDateTime);
             const date = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
@@ -121,7 +119,7 @@ exports.getAllLogs = async (req, res) => {
             
             return {
                 userPrincipalName: log.userPrincipalName,
-                userId: log.userPrincipalName, // Corrected from your old code
+                userId: log.userPrincipalName,
                 appDisplayName: log.appDisplayName,
                 date: date,
                 time: time
@@ -138,8 +136,8 @@ exports.getAllLogs = async (req, res) => {
 };
 
 // === 
-//      FUNCTION 2: (REPLACE THIS) Get Log Patterns for Dashboard 
-//      This is the new version that counts full sessions (3+ apps)
+//      FUNCTION 2: Get Log Patterns (MODIFIED)
+//      This version splits patterns by a 1-hour time gap.
 // ===
 exports.getLogPatterns = async (req, res) => {
     if (!blobServiceClient) {
@@ -151,7 +149,7 @@ exports.getLogPatterns = async (req, res) => {
     
     const containerName = "json-signin-logs"; // Your container name
     const containerClient = blobServiceClient.getContainerClient(containerName);
-
+    const oneHourInMs = 60 * 60 * 1000; // 3,600,000 milliseconds
     let rawLogs = [];
 
     try {
@@ -179,47 +177,69 @@ exports.getLogPatterns = async (req, res) => {
             }
         }
 
-        // 2. Sort all logs by user, then by time (Essential for finding patterns)
+        // 2. Sort all logs by user, then by time (Essential!)
         rawLogs.sort((a, b) => {
             if (a.userId < b.userId) return -1;
             if (a.userId > b.userId) return 1;
             return new Date(a.createdDateTime) - new Date(b.createdDateTime);
         });
 
-        // 3. Group logs by user into sessions
-        const userSessions = {};
-        rawLogs.forEach(log => {
-            if (!userSessions[log.userId]) {
-                userSessions[log.userId] = []; // Create a new list
-            }
+        // 3. --- NEW LOGIC: Build patterns based on time gaps ---
+        const patternCounts = {};
+        let currentPattern = [];
+        
+        for (let i = 0; i < rawLogs.length; i++) {
+            const log = rawLogs[i];
             
+            // Clean up the app name
             let appName = log.appDisplayName;
             if (appName === "MyUSF (OASIS)") appName = "MyUSF";
 
-            userSessions[log.userId].push(appName);
-        });
+            // Add app to the current pattern
+            currentPattern.push(appName);
 
-        // 4. Count the frequency of full session patterns
-        const patternCounts = {};
-        
-        Object.values(userSessions).forEach(sessionArray => {
+            // Check for the end of a pattern
+            let endOfPattern = false;
             
-            // Filter out consecutive duplicates (e.g., [A, A, B] -> [A, B])
-            const filteredSession = sessionArray.filter((app, index) => {
-                return index === 0 || app !== sessionArray[index - 1];
-            });
-
-            // If the user's session is less than 2 apps, skip it
-            if (filteredSession.length < 2) {
-                return;
+            if (i === rawLogs.length - 1) {
+                // This is the very last log in the whole file
+                endOfPattern = true;
+            } else {
+                const nextLog = rawLogs[i + 1];
+                
+                if (log.userId !== nextLog.userId) {
+                    // The next log is for a new user, so this user's pattern is done
+                    endOfPattern = true;
+                } else {
+                    // It's the same user, check the time gap
+                    const time1 = new Date(log.createdDateTime);
+                    const time2 = new Date(nextLog.createdDateTime);
+                    const diffInMs = time2 - time1;
+                    
+                    if (diffInMs > oneHourInMs) {
+                        // The gap is > 1 hour, so this pattern is done
+                        endOfPattern = true;
+                    }
+                }
             }
 
-            // Create the full pattern string (e.g., "GitHub → Canvas → MATLAB")
-            const pattern = filteredSession.join(' → '); 
-            
-            // Count this full pattern
-            patternCounts[pattern] = (patternCounts[pattern] || 0) + 1;
-        });
+            // 4. --- NEW LOGIC: Process and count the finished pattern ---
+            if (endOfPattern) {
+                // Filter out consecutive duplicates (e.g., [A, A, B] -> [A, B])
+                const filteredPattern = currentPattern.filter((app, index) => {
+                    return index === 0 || app !== currentPattern[index - 1];
+                });
+
+                // Only count patterns with 2 or more apps
+                if (filteredPattern.length >= 2) {
+                    const patternString = filteredPattern.join(' → ');
+                    patternCounts[patternString] = (patternCounts[patternString] || 0) + 1;
+                }
+                
+                // Reset for the next pattern
+                currentPattern = [];
+            }
+        }
 
         // 5. Format for Recharts
         let chartData = Object.keys(patternCounts).map(patternName => ({
@@ -227,9 +247,9 @@ exports.getLogPatterns = async (req, res) => {
             count: patternCounts[patternName]
         }));
 
-        // 6. Sort to rank by frequency and send ALL patterns
+        // 6. Sort to rank by frequency and send Top 10
         chartData.sort((a, b) => b.count - a.count);
-        res.json(chartData); // We removed .slice(0, 15)
+        res.json(chartData.slice(0, 10));
 
     } catch (error) {
         console.error(error);
