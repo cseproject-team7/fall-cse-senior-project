@@ -1,0 +1,28 @@
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET;
+
+const authMiddleware = (req, res, next) => {
+    try {
+        // 1. Get token from "Authorization: Bearer <token>"
+        const authHeader = req.headers.authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(401).json({ success: false, message: 'Not authorized, no token' });
+        }
+
+        const token = authHeader.split(' ')[1]; // Get just the token
+
+        // 2. Verify the token
+        const decoded = jwt.verify(token, JWT_SECRET);
+
+        // 3. Token is valid. Add user data to the request.
+        req.user = { userId: decoded.userId, email: decoded.email };
+
+        // 4. Continue to the protected route
+        next();
+    } catch (error) {
+        console.error('Auth middleware error:', error.message);
+        res.status(401).json({ success: false, message: 'Not authorized, token failed' });
+    }
+};
+
+module.exports = authMiddleware;

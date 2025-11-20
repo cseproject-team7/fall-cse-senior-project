@@ -1,3 +1,9 @@
+/* --- Add these three lines at the very top --- */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* ------------------------------------------- */
+
 * {
   margin: 0;
   padding: 0;
@@ -56,4 +62,30 @@ transform: rotate(-90deg);
 margin-left: 200px; /* This MUST match your sidebar width */
 padding: 20px;
 width: calc(100% - 200px);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #006747;
+    /* The SVG background is applied here */
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23EDEBD1' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+/* Custom styles for focus rings and other elements */
+.form-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 103, 71, 0.4);
+    border-color: #006747;
+}
+.submit-btn {
+    background-color: #006747;
+    color: #EDEBD1;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.submit-btn:hover {
+    background-color: #005238;
+    transform: translateY(-2px);
+}
+.submit-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(237, 235, 209, 0.6);
 }
