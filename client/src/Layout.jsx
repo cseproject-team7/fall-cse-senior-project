@@ -4,15 +4,14 @@ import Sidebar from './Sidebar';
 
 function Layout() {
   return (
-    <div className="app-layout">
-      {/* The sidebar is now part of the main layout */}
+    // Updated background color to match index.css
+    <div className="min-h-screen bg-[#f3f4f6]">
+      {/* The Sidebar component is fixed to the left */}
       <Sidebar />
 
-      {/* The "main-content" div will get padding to make 
-          room for the sidebar. We'll add this style next. */}
-      <main className="main-content">
-        {/* Outlet is the placeholder where your pages
-            (App.jsx and LogDashboard.jsx) will be rendered */}
+      {/* Main Content Area */}
+      <main className="ml-64 min-h-screen">
+        {/* This outlet renders your Dashboard or Predictions page */}
         <Outlet />
       </main>
     </div>

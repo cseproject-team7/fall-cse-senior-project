@@ -1,10 +1,11 @@
+/*
 .sidebar {
-  width: 200px; /* You can change this width */
+  width: 200px; /* You can change this width /
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  background: #2c3e50; /* A dark sidebar background */
+  background: #2c3e50; /* A dark sidebar background /
   padding: 20px;
   color: white;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -31,28 +32,28 @@
   display: block;
   padding: 10px 15px;
   text-decoration: none;
-  color: #bdc3c7; /* Light gray links */
+  color: #bdc3c7; /* Light gray links /
   border-radius: 5px;
   transition: background 0.2s;
 }
 
 .sidebar ul li a:hover {
-  background: #34495e; /* Darker hover */
+  background: #34495e; /* Darker hover /
   color: white;
 }
 
-/* This is the magic: styles for the *active* page link */
+/* This is the magic: styles for the *active* page link /
 .sidebar ul li a.active {
-  background: #006747; /* USF Green */
+  background: #006747; /* USF Green /
   color: white;
   font-weight: bold;
 }
 
-/* --- Add this to the bottom of Sidebar.css --- */
+/* --- Add this to the bottom of Sidebar.css --- /
 .sidebar-footer {
 position: absolute;
 bottom: 20px;
-width: calc(100% - 40px); /* Fill the padded width */
+width: calc(100% - 40px); /* Fill the padded width /
 }
 
 .logout-btn {
@@ -63,7 +64,7 @@ text-decoration: none;
 color: #bdc3c7;
 border-radius: 5px;
 transition: background 0.2s;
-background-color: #34495e; /* Darker background */
+background-color: #34495e; /* Darker background /
 border: none;
 text-align: left;
 font-size: 1em;
@@ -72,6 +73,7 @@ cursor: pointer;
 }
 
 .logout-btn:hover {
-background: #c0392b; /* A red hover for logout */
+background: #c0392b; /* A red hover for logout /
 color: white;
 }
+*/
