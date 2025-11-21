@@ -1,91 +1,53 @@
-/* --- Add these three lines at the very top --- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* ------------------------------------------- */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* Reset & Base Styles */
 body {
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #006747;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23EDEBD1' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  
+  /* --- THE NEW, HIGHER-CONTRAST BACKGROUND --- */
+  /* A slightly darker, cooler gray-beige for better card separation */
+  background-color: #f3f4f6; 
+  color: #1f2937; /* Dark Gray text for readability */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Custom Scrollbar for Tables/Charts */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; 
 }
 
-/* Makes the main content area start *after* the sidebar
-  and adds some padding.
-*/
-.main-content {
-  margin-left: 200px; /* This MUST match your sidebar width */
-  padding: 20px;
-  width: calc(100% - 200px);
-}
-/* --- Your Custom Loader (with rotation) --- */
+/* Loader Animation */
 .loader {
-width: 45px;
-aspect-ratio: 1;
-/* Updated to use USF Gold for visibility */
---c: no-repeat linear-gradient(#CDB87D calc(50% - 10px),#0000 0 calc(50% + 10px),#CDB87D 0);
-background:
-var(--c) 0%   100%,
-var(--c) 50%  100%,
-var(--c) 100% 100%;
-background-size: 20% calc(200% + 20px);
-animation:l4 1s infinite linear;
-/* Rotated 90 degrees counter-clockwise */
-transform: rotate(-90deg);
+  width: 45px;
+  aspect-ratio: 1;
+  --c: no-repeat linear-gradient(#006747 calc(50% - 10px),#0000 0 calc(50% + 10px),#006747 0);
+  background: 
+    var(--c) 0%   100%,
+    var(--c) 50%  100%,
+    var(--c) 100% 100%;
+  background-size: 20% calc(200% + 20px);
+  animation:l4 1s infinite linear;
+  transform: rotate(-90deg);
 }
 
 @keyframes l4 {
-33%  {background-position: 0% 50%,50% 100%,100% 100%}
-50%  {background-position: 0%  0%,50%  50%,100% 100%}
-66%  {background-position: 0%  0%,50%   0%,100%  50%}
-100% {background-position: 0%  0%,50%   0%,100%   0%}
-}
-
-/* This makes your main content area fit next to the sidebar */
-.main-content {
-margin-left: 200px; /* This MUST match your sidebar width */
-padding: 20px;
-width: calc(100% - 200px);
-}
-
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #006747;
-    /* The SVG background is applied here */
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23EDEBD1' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-/* Custom styles for focus rings and other elements */
-.form-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 103, 71, 0.4);
-    border-color: #006747;
-}
-.submit-btn {
-    background-color: #006747;
-    color: #EDEBD1;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.submit-btn:hover {
-    background-color: #005238;
-    transform: translateY(-2px);
-}
-.submit-btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(237, 235, 209, 0.6);
+    33%  {background-position: 0% 50%,50% 100%,100% 100%}
+    50%  {background-position: 0%  0%,50%  50%,100% 100%}
+    66%  {background-position: 0%  0%,50%   0%,100%  50%}
+    100% {background-position: 0%  0%,50%   0%,100%   0%}
 }
