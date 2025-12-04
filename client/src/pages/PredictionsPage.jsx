@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrainCircuit, AlertCircle } from 'lucide-react';
 import { fetchPersonas, setSelectedPersona } from '../store/personaSlice';
-import { fetchLogs } from '../store/logsSlice';
+import { fetchLogs, fetchAllGroupedLogs } from '../store/logsSlice';
 import { usePredictions } from '../hooks/usePredictions';
 import { useFeedback } from '../hooks/useFeedback';
 import PersonaSelector from '../features/personaSelector/PersonaSelector';
@@ -35,9 +35,13 @@ function PredictionsPage() {
     submitFeedback,
   } = useFeedback(logs, predictions, selectedPersona);
 
-  // Fetch personas on mount
+  // Fetch grouped logs and personas on mount
   useEffect(() => {
-    dispatch(fetchPersonas());
+    const loadData = async () => {
+      await dispatch(fetchAllGroupedLogs());
+      await dispatch(fetchPersonas());
+    };
+    loadData();
   }, [dispatch]);
 
   // Fetch logs when persona changes

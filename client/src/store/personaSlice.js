@@ -4,8 +4,8 @@ import { logsApi } from '../api/logsApi';
 export const fetchPersonas = createAsyncThunk(
   'persona/fetchPersonas',
   async () => {
-    const response = await logsApi.getPersonas();
-    return response.personas;
+    const response = await logsApi.getLogsGroupedByUser();
+    return response.users; // Return array of user names
   }
 );
 

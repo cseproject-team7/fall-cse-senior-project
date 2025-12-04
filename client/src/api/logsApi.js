@@ -12,4 +12,10 @@ export const logsApi = {
     const response = await apiClient.get(`/logs/${persona}`);
     return response.data;
   },
+
+  // Get all logs grouped by user (from Azure Blob Storage)
+  getLogsGroupedByUser: async () => {
+    const response = await apiClient.get('/logs-grouped');
+    return response.data;
+  },
 };

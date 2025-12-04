@@ -19,6 +19,24 @@ export const AuthProvider = ({ children }) => {
             delete axios.defaults.headers.common['Authorization'];
             localStorage.removeItem('token');
         }
+
+        // Setup axios interceptor to handle token expiration
+        const interceptor = axios.interceptors.response.use(
+            (response) => response,
+            (error) => {
+                if (error.response?.status === 401 && error.response?.data?.message?.includes('expired')) {
+                    // Token expired, logout user
+                    setToken(null);
+                    window.location.href = '/login';
+                }
+                return Promise.reject(error);
+            }
+        );
+
+        // Cleanup interceptor on unmount
+        return () => {
+            axios.interceptors.response.eject(interceptor);
+        };
     }, [token]);
 
     // Login function

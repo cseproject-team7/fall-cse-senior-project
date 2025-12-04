@@ -256,3 +256,89 @@ exports.getLogPatterns = async (req, res) => {
         res.status(500).send({ message: "Error fetching patterns", error: error.message });
     }
 };
+
+// === FUNCTION 3: Get All Logs Grouped by User (For Predictions Page) ===
+exports.getAllLogsGroupedByUser = async (req, res) => {
+    if (!blobServiceClient) {
+        return res.status(503).json({
+            success: false,
+            error: 'Azure Storage not configured'
+        });
+    }
+    
+    const containerName = "json-signin-logs";
+    const containerClient = blobServiceClient.getContainerClient(containerName);
+
+    try {
+        let allLogs = [];
+        
+        // 1. Fetch all logs from Azure Blob Storage
+        for await (const blob of containerClient.listBlobsFlat()) {
+            if (blob.name.endsWith('.json')) {
+                const blobClient = containerClient.getBlobClient(blob.name);
+                const downloadBlockBlobResponse = await blobClient.download(0);
+                const downloadedContent = await streamToString(downloadBlockBlobResponse.readableStreamBody);
+                
+                const lines = downloadedContent.split('\n');
+
+                lines.forEach(line => {
+                    if (line.trim() === "") return;
+                    try {
+                        const outerLog = JSON.parse(line);
+                        const innerLog = JSON.parse(outerLog.Body);
+                        
+                        allLogs.push({
+                            userPrincipalName: innerLog.userPrincipalName,
+                            userId: innerLog.userId,
+                            appDisplayName: innerLog.appDisplayName,
+                            createdDateTime: innerLog.createdDateTime,
+                            hour: new Date(innerLog.createdDateTime).getHours(),
+                            weekday: new Date(innerLog.createdDateTime).getDay()
+                        });
+                    } catch (e) {
+                        console.error(`Failed to parse a line: ${e.message}`);
+                    }
+                });
+            }
+        }
+
+        // 2. Group logs by user
+        const logsByUser = {};
+        const users = new Set();
+
+        allLogs.forEach(log => {
+            const user = log.userPrincipalName || log.userId;
+            users.add(user);
+            
+            if (!logsByUser[user]) {
+                logsByUser[user] = [];
+            }
+            
+            logsByUser[user].push({
+                appDisplayName: log.appDisplayName,
+                hour: log.hour,
+                weekday: log.weekday,
+                createdDateTime: log.createdDateTime
+            });
+        });
+
+        // 3. Sort logs for each user by time
+        Object.keys(logsByUser).forEach(user => {
+            logsByUser[user].sort((a, b) => 
+                new Date(a.createdDateTime) - new Date(b.createdDateTime)
+            );
+        });
+
+        // 4. Return grouped structure
+        const result = {
+            users: Array.from(users).sort(),
+            logsByUser: logsByUser
+        };
+        
+        res.json(result);
+
+    } catch (error) {
+        console.error('Error fetching grouped logs:', error);
+        res.status(500).send({ message: "Error fetching grouped logs", error: error.message });
+    }
+};
