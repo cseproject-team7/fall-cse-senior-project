@@ -1,7 +1,5 @@
 const axios = require('axios');
 
-const axios = require('axios');
-
 // ML Server Configuration
 // Use environment variable for production (separate ML server)
 // Default to localhost for development

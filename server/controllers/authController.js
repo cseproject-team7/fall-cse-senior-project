@@ -28,7 +28,7 @@ exports.login = async (req, res) => {
             const token = jwt.sign(
                 { userId: 'admin', email: ADMIN_USER }, 
                 JWT_SECRET, 
-                { expiresIn: '8h' } // Token lasts for 8 hours
+                { expiresIn: '24h' } // Token lasts for 24 hours
             );
             // 5. Send the token to the frontend
             res.json({ success: true, message: 'Login successful', token: token });

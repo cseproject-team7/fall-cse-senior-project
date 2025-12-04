@@ -1,11 +1,29 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { logsApi } from '../api/logsApi';
 
+// Fetch all grouped logs once
+export const fetchAllGroupedLogs = createAsyncThunk(
+  'logs/fetchAllGroupedLogs',
+  async () => {
+    const response = await logsApi.getLogsGroupedByUser();
+    return response; // Returns { users: [...], logsByUser: {...} }
+  }
+);
+
+// Action to select logs for a specific user
 export const fetchLogs = createAsyncThunk(
   'logs/fetchLogs',
-  async (persona) => {
-    const response = await logsApi.getLogsByPersona(persona);
-    return response.logs;
+  async (persona, { getState }) => {
+    const state = getState();
+    
+    // If we already have grouped logs, use them
+    if (state.logs.logsByUser && state.logs.logsByUser[persona]) {
+      return state.logs.logsByUser[persona];
+    }
+    
+    // Otherwise fetch grouped logs
+    const response = await logsApi.getLogsGroupedByUser();
+    return response.logsByUser[persona] || [];
   }
 );
 
@@ -13,6 +31,7 @@ const logsSlice = createSlice({
   name: 'logs',
   initialState: {
     logs: [],
+    logsByUser: null, // Store all grouped logs
     loading: false,
     error: null,
   },
@@ -23,6 +42,18 @@ const logsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchAllGroupedLogs.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllGroupedLogs.fulfilled, (state, action) => {
+        state.loading = false;
+        state.logsByUser = action.payload.logsByUser;
+      })
+      .addCase(fetchAllGroupedLogs.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
       .addCase(fetchLogs.pending, (state) => {
         state.loading = true;
         state.error = null;

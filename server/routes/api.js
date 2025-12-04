@@ -50,6 +50,7 @@ router.get('/health', (req, res) => {
 // Temporarily removed authMiddleware for demo/testing purposes
 router.get('/logs/personas', logsController.getPersonas);
 router.get('/logs/:persona', logsController.getLogsByPersona);
+router.get('/logs-grouped', logsController.getAllLogsGroupedByUser); // NEW: Get all logs grouped by user for predictions page
 router.post('/predict', predictionController.predict);
 router.post('/record-app-access', predictionController.recordAppAccess); // NEW: Record app access
 router.post('/feedback', predictionController.submitFeedback); // NEW: Submit incorrect prediction feedback
