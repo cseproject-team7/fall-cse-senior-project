@@ -19,7 +19,10 @@ function LogDashboard() {
     useEffect(() => {
         const fetchLogs = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/logs'); 
+                const API_URL = window.location.hostname === 'localhost' 
+                    ? 'http://localhost:8080' 
+                    : '';
+                const response = await axios.get(`${API_URL}/api/logs`); 
                 setLogs(response.data);
                 
                 const appCounts = {};
@@ -42,7 +45,10 @@ function LogDashboard() {
         };
         const fetchPatterns = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/patterns');
+                const API_URL = window.location.hostname === 'localhost' 
+                    ? 'http://localhost:8080' 
+                    : '';
+                const response = await axios.get(`${API_URL}/api/patterns`);
                 setPatternData(response.data);
             } catch (err) {
                 setError(err.message);
