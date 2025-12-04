@@ -47,10 +47,13 @@ router.get('/health', (req, res) => {
 });
 
 // --- ML/Persona Routes ---
-// We now add 'authMiddleware' to protect them.
-router.get('/logs/personas', authMiddleware, logsController.getPersonas);
-router.get('/logs/:persona', authMiddleware, logsController.getLogsByPersona);
-router.post('/predict', authMiddleware, predictionController.predict);
+// Temporarily removed authMiddleware for demo/testing purposes
+router.get('/logs/personas', logsController.getPersonas);
+router.get('/logs/:persona', logsController.getLogsByPersona);
+router.post('/predict', predictionController.predict);
+router.post('/record-app-access', predictionController.recordAppAccess); // NEW: Record app access
+router.post('/feedback', predictionController.submitFeedback); // NEW: Submit incorrect prediction feedback
+router.get('/feedback/stats', predictionController.getFeedbackStats); // NEW: Get feedback stats
 
 // --- Analytics Dashboard Routes ---
 // These are now also protected by 'authMiddleware'

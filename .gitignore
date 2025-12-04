@@ -45,3 +45,14 @@ Desktop.ini
 *.tgz
 *.zip
 
+model_training_pipeline/
+
+venv_py310/
+models/
+model_artifacts/
+
+package-lock.json
+*venv
+
+logs.json
+raw_logs/
