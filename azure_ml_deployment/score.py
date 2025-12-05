@@ -229,36 +229,96 @@ def predict_next_pattern_and_apps(history_sessions: List[List[str]], num_predict
         pattern_confidence = pattern_probs[pattern_id].item()
         pattern_name = pattern_encoder.inverse_transform([pattern_id])[0]
         
-        # Get top app predictions
+        # Get app sequence predictions with boosting for multi-app sequences
         app_probs = torch.softmax(app_logits, dim=-1)[0]
-        top_app_indices = torch.topk(app_probs, min(num_predictions, len(app_encoder.classes_))).indices.tolist()
-        top_app_probs = [app_probs[idx].item() for idx in top_app_indices]
         
-        # Decode app sequences
+        # BOOST LOGIC: Extreme graduated boosting to overcome model bias
+        # The model heavily favors 2-app sequences, so we need very aggressive boosts
+        # Target: ~20% single, ~35% 2-app, ~25% 3-app, ~18% 4-app, ~2% 5-app
+        boosted_probs = app_probs.clone()
+        
+        for idx in range(len(app_encoder.classes_)):
+            app_seq = app_encoder.classes_[idx]
+            
+            # Filter out ONLY sequences that are just noise apps by themselves
+            if app_seq in ['Microsoft 365', 'Copilot']:
+                boosted_probs[idx] = boosted_probs[idx] * 0.01
+                continue
+            
+            # Apply extreme graduated boosting based on sequence length
+            if ', ' in app_seq:  # Multi-app sequence
+                apps_list = app_seq.split(', ')
+                num_apps = len(apps_list)
+                
+                # Check if sequence has meaningful apps
+                meaningful_apps = [app for app in apps_list if app not in ['Microsoft 365', 'Copilot']]
+                
+                # Fine-tuned boosting: Target ~20% 1-app, ~35% 2-app, ~25% 3-app, ~18% 4-app
+                if num_apps == 2:
+                    if len(meaningful_apps) >= 1:
+                        boosted_probs[idx] = boosted_probs[idx] * 1.5  # Reduced to lower 2-app %
+                elif num_apps == 3:
+                    if len(meaningful_apps) >= 2:
+                        boosted_probs[idx] = boosted_probs[idx] * 30.0  # Increased from 18 to boost 3-app
+                    else:
+                        boosted_probs[idx] = boosted_probs[idx] * 15.0
+                elif num_apps == 4:
+                    if len(meaningful_apps) >= 3:
+                        boosted_probs[idx] = boosted_probs[idx] * 80.0
+                    else:
+                        boosted_probs[idx] = boosted_probs[idx] * 45.0
+                elif num_apps >= 5:
+                    boosted_probs[idx] = boosted_probs[idx] * 120.0  # Maximum for 5+ app
+            else:
+                # Single apps get slight boost to maintain ~20% presence
+                boosted_probs[idx] = boosted_probs[idx] * 1.2
+        
+        # Re-normalize after boosting and filtering
+        boosted_probs = boosted_probs / boosted_probs.sum()
+        
+        # Get top predictions from boosted probabilities
+        top_app_indices = torch.topk(boosted_probs, min(num_predictions * 2, len(app_encoder.classes_))).indices.tolist()
+        top_app_probs = [boosted_probs[idx].item() for idx in top_app_indices]
+        
+        # Decode app sequences - these are the actual predicted sessions
         top_app_sequences = app_encoder.inverse_transform(top_app_indices)
         
-        # Parse app sequences into individual apps
-        predicted_apps = []
-        for app_seq in top_app_sequences:
-            if ', ' in app_seq:
-                apps = app_seq.split(', ')
-                predicted_apps.extend(apps[:3])
-            else:
-                predicted_apps.append(app_seq)
+        # Parse sequences into structured format
+        predicted_app_sequences = []
         
-        # Remove duplicates
-        seen = set()
-        unique_apps = []
-        for app in predicted_apps:
-            if app not in seen:
-                seen.add(app)
-                unique_apps.append(app)
+        for i, app_seq in enumerate(top_app_sequences):
+            # Skip any that slipped through with zero probability
+            if top_app_probs[i] == 0.0:
+                continue
+                
+            if ', ' in app_seq:
+                # This is a multi-app sequence (the actual pattern session)
+                apps = app_seq.split(', ')
+                predicted_app_sequences.append({
+                    'apps': apps,
+                    'confidence': top_app_probs[i],
+                    'session_type': 'multi_app'
+                })
+            else:
+                # Single app
+                predicted_app_sequences.append({
+                    'apps': [app_seq],
+                    'confidence': top_app_probs[i],
+                    'session_type': 'single_app'
+                })
+        
+        # Take top num_predictions
+        predicted_app_sequences = predicted_app_sequences[:num_predictions]
+        
+        # Return the most likely session (first prediction after reranking)
+        most_likely_session = predicted_app_sequences[0]['apps'] if predicted_app_sequences else ['Canvas']
         
         return {
             'next_pattern': pattern_name,
             'pattern_confidence': float(pattern_confidence),
-            'top_apps': unique_apps[:num_predictions],
-            'app_confidences': top_app_probs
+            'top_apps': most_likely_session,  # This is the actual sequence of apps
+            'app_confidences': [seq['confidence'] for seq in predicted_app_sequences],
+            'all_predicted_sequences': predicted_app_sequences  # All top sequences (boosted & reranked)
         }
 
 def predict_multi_step(history_sessions: List[List[str]], steps: int = 10) -> List[Dict[str, Any]]:
@@ -267,21 +327,96 @@ def predict_multi_step(history_sessions: List[List[str]], steps: int = 10) -> Li
     current_history = list(history_sessions[-10:])
     
     for step in range(steps):
-        pred = predict_next_pattern_and_apps(current_history, num_predictions=3)
+        pred = predict_next_pattern_and_apps(current_history, num_predictions=5)
+        
+        # Get the predicted app sequence (could be 2-5 apps)
+        predicted_session = pred['top_apps']  # This is already a list of apps in the sequence
+        
         predictions.append({
             'step': step + 1,
             'pattern': pred['next_pattern'],
             'confidence': pred['pattern_confidence'],
-            'top_apps': pred['top_apps'][:3]
+            'top_apps': predicted_session  # Full app sequence for this pattern
         })
         
-        # Add prediction to history
-        synthetic_session = pred['top_apps'][:2]
-        current_history.append(synthetic_session)
+        # Add the predicted session to history for next prediction
+        current_history.append(predicted_session)
         if len(current_history) > 10:
             current_history.pop(0)
     
     return predictions
+
+def compute_pattern_transitions() -> Dict[str, Any]:
+    """
+    Use the trained LSTM model to predict pattern transitions.
+    For each pattern, we feed it as context and see what the model predicts next.
+    """
+    pattern_names = list(pattern_encoder.classes_)
+    
+    # We'll build a context sequence and let the model predict next patterns
+    sequence_length = 5
+    
+    transition_probs = {}
+    
+    for from_pattern in pattern_names:
+        from_idx = pattern_encoder.transform([from_pattern])[0]
+        
+        # Create a sequence where the last element is from_pattern
+        pattern_sequence = [from_idx] * sequence_length
+        
+        # Use a common app sequence (Canvas is most common)
+        try:
+            canvas_idx = app_encoder.transform(['Canvas'])[0]
+        except:
+            canvas_idx = 0
+        app_sequence = [canvas_idx] * sequence_length
+        
+        # Convert to tensors
+        pattern_tensor = torch.tensor([pattern_sequence], dtype=torch.long)
+        app_tensor = torch.tensor([app_sequence], dtype=torch.long)
+        
+        # Get model prediction
+        with torch.no_grad():
+            pattern_logits, _ = model(pattern_tensor, app_tensor)
+            probabilities = torch.softmax(pattern_logits[0], dim=-1)
+        
+        # Extract top predictions as successors
+        successors = []
+        for to_idx, prob in enumerate(probabilities):
+            prob_val = float(prob)
+            if prob_val > 0.01:  # Only include if > 1% probability
+                successors.append({
+                    'pattern': pattern_names[to_idx],
+                    'probability': prob_val,
+                    'confidence': prob_val * 100,
+                    'count': int(prob_val * 100)
+                })
+        
+        successors.sort(key=lambda x: x['probability'], reverse=True)
+        transition_probs[from_pattern] = successors[:5]
+    
+    # Compute predecessors (reverse transitions)
+    predecessor_probs = {pattern: [] for pattern in pattern_names}
+    
+    for from_pattern, successors in transition_probs.items():
+        for successor_info in successors:
+            to_pattern = successor_info['pattern']
+            predecessor_probs[to_pattern].append({
+                'pattern': from_pattern,
+                'probability': successor_info['probability'],
+                'confidence': successor_info['confidence'],
+                'count': successor_info['count']
+            })
+    
+    # Sort predecessors by probability
+    for pattern in predecessor_probs:
+        predecessor_probs[pattern].sort(key=lambda x: x['probability'], reverse=True)
+        predecessor_probs[pattern] = predecessor_probs[pattern][:5]
+    
+    return {
+        'predecessors': predecessor_probs,
+        'successors': transition_probs
+    }
 
 # ============================================================================
 # Scoring Function
@@ -297,12 +432,36 @@ def run(raw_data: str) -> str:
             {"appDisplayName": "Canvas", "createdDateTime": "2024-12-01T10:00:00Z"},
             ...
         ],
-        "num_predictions": 10  // optional, defaults to 1
+        "num_predictions": 10,  // optional, defaults to 1
+        "request_type": "predict" // optional, can be "predict" or "pattern_transitions"
     }
     """
     try:
         # Parse input
         data = json.loads(raw_data)
+        request_type = data.get('request_type', 'predict')
+        
+        # Handle pattern transitions request
+        if request_type == 'pattern_transitions':
+            transitions = compute_pattern_transitions()
+            pattern_names = list(pattern_encoder.classes_)
+            
+            # Format for frontend: array of pattern chains
+            result = []
+            for pattern in pattern_names:
+                result.append({
+                    'pattern': pattern,
+                    'predecessors': transitions['predecessors'].get(pattern, []),
+                    'successors': transitions['successors'].get(pattern, [])
+                })
+            
+            return json.dumps({
+                'success': True,
+                'transitions': result,
+                'total_patterns': len(pattern_names)
+            })
+        
+        # Handle prediction request
         logs = data.get('logs', [])
         num_steps = data.get('num_predictions', 1)
         

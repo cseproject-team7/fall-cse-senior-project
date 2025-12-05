@@ -27,39 +27,39 @@ async function streamToString(readableStream) {
 
 // Get list of available personas
 exports.getPersonas = async (req, res) => {
-  try {
-    const personas = await eventHubService.getPersonas();
-    res.json({ success: true, personas });
-  } catch (error) {
-    console.error('Error fetching personas:', error.message);
-    res.status(500).json({ 
-      success: false, 
-      error: error.message 
-    });
-  }
+    try {
+        const personas = await eventHubService.getPersonas();
+        res.json({ success: true, personas });
+    } catch (error) {
+        console.error('Error fetching personas:', error.message);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
 };
 
 // Get logs filtered by persona
 exports.getLogsByPersona = async (req, res) => {
-  try {
-    const { persona } = req.params;
-    const limit = parseInt(req.query.limit) || 50;
-    
-    const logs = await eventHubService.getLogsByPersona(persona, limit);
-    
-    res.json({ 
-      success: true, 
-      persona,
-      count: logs.length,
-      logs 
-    });
-  } catch (error) {
-    console.error('Error fetching logs:', error.message);
-    res.status(500).json({ 
-      success: false, 
-      error: error.message 
-    });
-  }
+    try {
+        const { persona } = req.params;
+        const limit = parseInt(req.query.limit) || 50;
+
+        const logs = await eventHubService.getLogsByPersona(persona, limit);
+
+        res.json({
+            success: true,
+            persona,
+            count: logs.length,
+            logs
+        });
+    } catch (error) {
+        console.error('Error fetching logs:', error.message);
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
 };
 
 // === FUNCTION 1: Get All Logs for Dashboard (Sorted by Time) ===
@@ -70,11 +70,11 @@ exports.getAllLogs = async (req, res) => {
             error: 'Azure Storage not configured'
         });
     }
-    
+
     // Add pagination parameters
     const limit = parseInt(req.query.limit) || 1000; // Default 1000 logs
     const offset = parseInt(req.query.offset) || 0;
-    
+
     const containerName = "json-signin-logs"; // Your container name
     const containerClient = blobServiceClient.getContainerClient(containerName);
 
@@ -86,7 +86,7 @@ exports.getAllLogs = async (req, res) => {
                 const blobClient = containerClient.getBlobClient(blob.name);
                 const downloadBlockBlobResponse = await blobClient.download(0);
                 const downloadedContent = await streamToString(downloadBlockBlobResponse.readableStreamBody);
-                
+
                 const lines = downloadedContent.split('\n');
 
                 lines.forEach(line => {
@@ -94,7 +94,7 @@ exports.getAllLogs = async (req, res) => {
                     try {
                         const outerLog = JSON.parse(line);
                         const innerLog = JSON.parse(outerLog.Body);
-                        
+
                         // 2. Push the raw log data, including the sort key
                         allLogs.push({
                             userPrincipalName: innerLog.userPrincipalName,
@@ -124,7 +124,7 @@ exports.getAllLogs = async (req, res) => {
             const date = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
             const minutes = d.getMinutes().toString().padStart(2, '0');
             const time = `${d.getHours()}:${minutes}`;
-            
+
             return {
                 userPrincipalName: log.userPrincipalName,
                 userId: log.userPrincipalName,
@@ -160,7 +160,7 @@ exports.getLogPatterns = async (req, res) => {
             error: 'Azure Storage not configured'
         });
     }
-    
+
     const containerName = "json-signin-logs"; // Your container name
     const containerClient = blobServiceClient.getContainerClient(containerName);
     const oneHourInMs = 60 * 60 * 1000; // 3,600,000 milliseconds
@@ -173,7 +173,7 @@ exports.getLogPatterns = async (req, res) => {
                 const blobClient = containerClient.getBlobClient(blob.name);
                 const downloadBlockBlobResponse = await blobClient.download(0);
                 const downloadedContent = await streamToString(downloadBlockBlobResponse.readableStreamBody);
-                
+
                 const lines = downloadedContent.split('\n');
 
                 lines.forEach(line => {
@@ -184,7 +184,7 @@ exports.getLogPatterns = async (req, res) => {
                         rawLogs.push({
                             userId: innerLog.userId,
                             appDisplayName: innerLog.appDisplayName,
-                            createdDateTime: innerLog.createdDateTime 
+                            createdDateTime: innerLog.createdDateTime
                         });
                     } catch (e) { /* skip bad lines */ }
                 });
@@ -201,10 +201,10 @@ exports.getLogPatterns = async (req, res) => {
         // 3. --- NEW LOGIC: Build patterns based on time gaps ---
         const patternCounts = {};
         let currentPattern = [];
-        
+
         for (let i = 0; i < rawLogs.length; i++) {
             const log = rawLogs[i];
-            
+
             // Clean up the app name
             let appName = log.appDisplayName;
             if (appName === "MyUSF (OASIS)") appName = "MyUSF";
@@ -214,13 +214,13 @@ exports.getLogPatterns = async (req, res) => {
 
             // Check for the end of a pattern
             let endOfPattern = false;
-            
+
             if (i === rawLogs.length - 1) {
                 // This is the very last log in the whole file
                 endOfPattern = true;
             } else {
                 const nextLog = rawLogs[i + 1];
-                
+
                 if (log.userId !== nextLog.userId) {
                     // The next log is for a new user, so this user's pattern is done
                     endOfPattern = true;
@@ -229,7 +229,7 @@ exports.getLogPatterns = async (req, res) => {
                     const time1 = new Date(log.createdDateTime);
                     const time2 = new Date(nextLog.createdDateTime);
                     const diffInMs = time2 - time1;
-                    
+
                     if (diffInMs > oneHourInMs) {
                         // The gap is > 1 hour, so this pattern is done
                         endOfPattern = true;
@@ -249,7 +249,7 @@ exports.getLogPatterns = async (req, res) => {
                     const patternString = filteredPattern.join(' → ');
                     patternCounts[patternString] = (patternCounts[patternString] || 0) + 1;
                 }
-                
+
                 // Reset for the next pattern
                 currentPattern = [];
             }
@@ -267,7 +267,7 @@ exports.getLogPatterns = async (req, res) => {
             const apps = item.name.split(' → ');
             // Take first 2-3 apps as the pattern signature
             const signature = apps.slice(0, Math.min(3, apps.length)).join(' → ');
-            
+
             if (!aggregatedCounts[signature]) {
                 aggregatedCounts[signature] = {
                     name: signature + (apps.length > 3 ? ' → ...' : ''),
@@ -303,20 +303,20 @@ exports.getAllLogsGroupedByUser = async (req, res) => {
             error: 'Azure Storage not configured'
         });
     }
-    
+
     const containerName = "json-signin-logs";
     const containerClient = blobServiceClient.getContainerClient(containerName);
 
     try {
         let allLogs = [];
-        
+
         // 1. Fetch all logs from Azure Blob Storage
         for await (const blob of containerClient.listBlobsFlat()) {
             if (blob.name.endsWith('.json')) {
                 const blobClient = containerClient.getBlobClient(blob.name);
                 const downloadBlockBlobResponse = await blobClient.download(0);
                 const downloadedContent = await streamToString(downloadBlockBlobResponse.readableStreamBody);
-                
+
                 const lines = downloadedContent.split('\n');
 
                 lines.forEach(line => {
@@ -324,7 +324,7 @@ exports.getAllLogsGroupedByUser = async (req, res) => {
                     try {
                         const outerLog = JSON.parse(line);
                         const innerLog = JSON.parse(outerLog.Body);
-                        
+
                         allLogs.push({
                             userPrincipalName: innerLog.userPrincipalName,
                             userId: innerLog.userId,
@@ -347,11 +347,11 @@ exports.getAllLogsGroupedByUser = async (req, res) => {
         allLogs.forEach(log => {
             const user = log.userPrincipalName || log.userId;
             users.add(user);
-            
+
             if (!logsByUser[user]) {
                 logsByUser[user] = [];
             }
-            
+
             logsByUser[user].push({
                 appDisplayName: log.appDisplayName,
                 hour: log.hour,
@@ -362,7 +362,7 @@ exports.getAllLogsGroupedByUser = async (req, res) => {
 
         // 3. Sort logs for each user by time
         Object.keys(logsByUser).forEach(user => {
-            logsByUser[user].sort((a, b) => 
+            logsByUser[user].sort((a, b) =>
                 new Date(a.createdDateTime) - new Date(b.createdDateTime)
             );
         });
@@ -372,7 +372,7 @@ exports.getAllLogsGroupedByUser = async (req, res) => {
             users: Array.from(users).sort(),
             logsByUser: logsByUser
         };
-        
+
         res.json(result);
 
     } catch (error) {
@@ -385,28 +385,76 @@ exports.getAllLogsGroupedByUser = async (req, res) => {
 exports.getPatternChains = async (req, res) => {
     try {
         const axios = require('axios');
-        
+
         // Get ML server URL from environment or default to localhost
         const ML_SERVER_URL = process.env.ML_SERVER_URL || 'http://localhost:5001';
         const AZURE_ML_KEY = process.env.AZURE_ML_KEY || '';
         const isAzureML = ML_SERVER_URL.includes('inference.ml.azure.com');
-        
-        // Prepare headers
-        const headers = {};
-        if (isAzureML && AZURE_ML_KEY) {
-            headers['Authorization'] = `Bearer ${AZURE_ML_KEY}`;
+
+        // If using Azure ML, pattern transitions are not available - return hardcoded data
+        if (isAzureML) {
+            console.log('📊 Fetching pattern transitions from Azure ML endpoint');
+
+            // Azure ML endpoint - use POST with request_type
+            const headers = { 'Content-Type': 'application/json' };
+            if (AZURE_ML_KEY) {
+                headers['Authorization'] = `Bearer ${AZURE_ML_KEY}`;
+            }
+
+            const response = await axios.post(
+                ML_SERVER_URL,
+                { request_type: 'pattern_transitions' },
+                { headers, timeout: 30000 }
+            );
+
+            // Parse if string response
+            let result = response.data;
+            if (typeof result === 'string') {
+                result = JSON.parse(result);
+            }
+
+            console.log('Azure ML response:', JSON.stringify(result).substring(0, 200));
+
+            // Check for success (handle both Python True and JavaScript true)
+            if (result.success !== true && result.success !== 'True') {
+                console.error('Azure ML error response:', result);
+                throw new Error(result.error || 'ML server returned error');
+            }
+
+            // Format response: convert probability to count-like display for consistency
+            const formattedTransitions = result.transitions.map(item => {
+                return {
+                    pattern: item.pattern,
+                    predecessors: item.predecessors.map(pred => ({
+                        pattern: pred.pattern,
+                        count: Math.round(pred.confidence), // Use confidence % as display count
+                        probability: pred.probability
+                    })),
+                    successors: item.successors.map(succ => ({
+                        pattern: succ.pattern,
+                        count: Math.round(succ.confidence), // Use confidence % as display count
+                        probability: succ.probability
+                    }))
+                };
+            });
+
+            // Return array directly to match local ML server format
+            return res.json(formattedTransitions);
         }
-        
+
+        // Prepare headers for local ML server
+        const headers = {};
+
         // Determine endpoint URL
-        const endpointUrl = isAzureML ? ML_SERVER_URL : `${ML_SERVER_URL}/pattern-transitions`;
-        
+        const endpointUrl = `${ML_SERVER_URL}/pattern-transitions`;
+
         // Call ML server to get model-learned pattern transitions
         const response = await axios.get(endpointUrl, { headers });
-        
+
         if (!response.data.success) {
             throw new Error('ML server returned error');
         }
-        
+
         // Format response: convert probability to count-like display for consistency
         const formattedTransitions = response.data.transitions.map(item => {
             return {
@@ -423,15 +471,15 @@ exports.getPatternChains = async (req, res) => {
                 }))
             };
         });
-        
+
         res.json(formattedTransitions);
-        
+
     } catch (error) {
         console.error('Error fetching pattern chains from ML model:', error);
-        
+
         // Fallback: return empty transitions if ML server is down
-        res.status(500).json({ 
-            message: "ML server unavailable for pattern transitions", 
+        res.status(500).json({
+            message: "ML server unavailable for pattern transitions",
             error: error.message,
             fallback: []
         });
