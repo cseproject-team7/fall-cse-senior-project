@@ -68,8 +68,6 @@ exports.predictPersona = async (req, res) => {
       }
     }
 
-    const result = await localMLService.predictPersona(userId, records);
-
     res.json({
       success: true,
       ...result,
@@ -78,6 +76,35 @@ exports.predictPersona = async (req, res) => {
 
   } catch (error) {
     console.error('Server error:', error);
+    res.status(500).json({
+      error: 'Internal server error',
+      message: error.message
+    });
+  }
+};
+
+// Evaluate model accuracy endpoint
+exports.evaluateAccuracy = async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({
+        error: 'Invalid input',
+        message: 'Expected "userId" to evaluate accuracy'
+      });
+    }
+
+    const result = await localMLService.evaluateAccuracy(userId);
+
+    res.json({
+      success: true,
+      ...result,
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    console.error('Accuracy evaluation error:', error);
     res.status(500).json({
       error: 'Internal server error',
       message: error.message

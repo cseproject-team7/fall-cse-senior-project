@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import Layout from './components/Layout';
 import LogDashboard from './pages/LogDashboard';
 import PredictionsPage from './pages/PredictionsPage';
+import TestLabPage from './pages/TestLabPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route element={<Layout />}>
               <Route path="/" element={<PredictionsPage />} />
               <Route path="/dashboard" element={<LogDashboard />} />
+              <Route path="/testlab" element={<TestLabPage />} />
             </Route>
           </Route>
 

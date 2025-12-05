@@ -17,6 +17,7 @@ router.get('/logs/:persona', logsController.getLogsByPersona);
 // === NEW Analytics Dashboard endpoints ===
 router.get('/logs', logsController.getAllLogs); // Fetches all logs
 router.get('/patterns', logsController.getLogPatterns); // Fetches sequence patterns
+router.get('/pattern-chains', logsController.getPatternChains); // Fetches pattern predecessors/successors
 
 // Prediction endpoint (Azure ML)
 router.post('/predict', predictionController.predict);
@@ -60,5 +61,6 @@ router.get('/feedback/stats', predictionController.getFeedbackStats); // NEW: Ge
 // These are now also protected by 'authMiddleware'
 router.get('/logs', authMiddleware, logsController.getAllLogs);
 router.get('/patterns', authMiddleware, logsController.getLogPatterns);
+router.get('/pattern-chains', authMiddleware, logsController.getPatternChains);
 
 module.exports = router;

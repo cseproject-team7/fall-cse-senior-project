@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LayoutDashboard, BrainCircuit, LogOut, Shield } from 'lucide-react';
+import { LayoutDashboard, Sparkles, LogOut, Shield, FlaskConical } from 'lucide-react';
 
 function Sidebar() {
   const { logout } = useAuth();
@@ -32,7 +32,7 @@ function Sidebar() {
               }`
             }
           >
-            <BrainCircuit className="w-5 h-5" />
+            <Sparkles className="w-5 h-5" />
             Predictions
           </NavLink>
         </li>
@@ -49,6 +49,21 @@ function Sidebar() {
           >
             <LayoutDashboard className="w-5 h-5" />
             Dashboard
+          </NavLink>
+        </li>
+        <li>
+          <NavLink 
+            to="/testlab"
+            className={({ isActive }) => 
+              `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
+                isActive 
+                  ? 'bg-[#EDEBD1] text-[#006747] font-bold shadow-md' 
+                  : 'text-white hover:bg-[#005238] hover:pl-5'
+              }`
+            }
+          >
+            <FlaskConical className="w-5 h-5" />
+            Test Lab
           </NavLink>
         </li>
       </ul>
