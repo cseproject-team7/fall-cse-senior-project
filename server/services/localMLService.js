@@ -4,6 +4,10 @@ const axios = require('axios');
 // Use environment variable for production (separate ML server)
 // Default to localhost for development
 const ML_SERVER_URL = process.env.ML_SERVER_URL || 'http://localhost:5001';
+const AZURE_ML_KEY = process.env.AZURE_ML_KEY || '';
+
+// Check if using Azure ML endpoint
+const isAzureML = ML_SERVER_URL.includes('inference.ml.azure.com');
 
 // Main prediction function - calls dual-head LSTM server
 exports.predict = async (data) => {
@@ -15,7 +19,10 @@ exports.predict = async (data) => {
     }
 
     console.log('🔵 Sending to Dual-Head LSTM server:', JSON.stringify(payload.slice(0, 3), null, 2), '...');
-    console.log('🔵 ML Server URL:', `${ML_SERVER_URL}/predict`);
+    
+    // Determine endpoint URL (Azure ML uses /score, local uses /predict)
+    const endpointUrl = isAzureML ? ML_SERVER_URL : `${ML_SERVER_URL}/predict`;
+    console.log('🔵 ML Server URL:', endpointUrl);
 
     // Convert logs to format expected by ml_server_dual
     const logs = payload.map(log => ({
@@ -25,15 +32,21 @@ exports.predict = async (data) => {
 
     const startTime = Date.now();
 
+    // Prepare headers
+    const headers = { 'Content-Type': 'application/json' };
+    if (isAzureML && AZURE_ML_KEY) {
+      headers['Authorization'] = `Bearer ${AZURE_ML_KEY}`;
+    }
+
     // Call the dual-head LSTM server
     const response = await axios.post(
-      `${ML_SERVER_URL}/predict`,
+      endpointUrl,
       { 
         logs: logs,
         num_predictions: 10  // Get 10 future pattern predictions
       },
       {
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         timeout: 30000
       }
     );
@@ -42,7 +55,11 @@ exports.predict = async (data) => {
     console.log(`⏱️  ML server responded in ${elapsed}ms`);
     console.log('✅ ML response:', JSON.stringify(response.data, null, 2));
 
-    const result = response.data;
+    // Parse response if it's a string (Azure ML returns JSON string)
+    let result = response.data;
+    if (typeof result === 'string') {
+      result = JSON.parse(result);
+    }
 
     if (!result.success) {
       throw new Error(result.error || 'Prediction failed');
@@ -79,9 +96,18 @@ exports.predictWithNewAccess = async (logs, appDisplayName) => {
     // Convert logs to proper format
     let logData = Array.isArray(logs) ? logs : [logs];
     
+    // Prepare headers
+    const headers = { 'Content-Type': 'application/json' };
+    if (isAzureML && AZURE_ML_KEY) {
+      headers['Authorization'] = `Bearer ${AZURE_ML_KEY}`;
+    }
+
+    // Determine endpoint URL
+    const endpointUrl = isAzureML ? ML_SERVER_URL : `${ML_SERVER_URL}/predict`;
+
     // Call ML server with new app access
     const response = await axios.post(
-      `${ML_SERVER_URL}/predict`,
+      endpointUrl,
       { 
         logs: logData.map(log => ({
           appDisplayName: log.appDisplayName,
@@ -94,12 +120,16 @@ exports.predictWithNewAccess = async (logs, appDisplayName) => {
         }
       },
       {
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         timeout: 30000
       }
     );
 
-    const result = response.data;
+    // Parse response if it's a string (Azure ML returns JSON string)
+    let result = response.data;
+    if (typeof result === 'string') {
+      result = JSON.parse(result);
+    }
 
     if (!result.success) {
       throw new Error(result.error || 'Prediction failed');
@@ -145,19 +175,75 @@ exports.predictPersona = async (userId, records) => {
       }
     }
 
+    // Prepare headers
+    const headers = { 'Content-Type': 'application/json' };
+    if (isAzureML && AZURE_ML_KEY) {
+      headers['Authorization'] = `Bearer ${AZURE_ML_KEY}`;
+    }
+
+    // Note: Persona prediction not yet supported in Azure ML endpoint
+    const endpointUrl = isAzureML ? ML_SERVER_URL : `${ML_SERVER_URL}/api/predict-persona`;
+
     const response = await axios.post(
-      `${ML_SERVER_URL}/api/predict-persona`,
+      endpointUrl,
       { userId, records },
       {
-        headers: { 'Content-Type': 'application/json' },
+        headers,
         timeout: 30000
+      }
+    );
+
+    // Parse response if it's a string (Azure ML returns JSON string)
+    let result = response.data;
+    if (typeof result === 'string') {
+      result = JSON.parse(result);
+    }
+
+    return result;
+
+  } catch (error) {
+    console.error('ML server error:', error.message);
+    throw error;
+  }
+};
+
+// Evaluate accuracy on user logs
+exports.evaluateAccuracy = async (userId) => {
+  try {
+    // Fetch user logs
+    const logsController = require('../controllers/logsController');
+    const logs = await new Promise((resolve, reject) => {
+      const req = { query: {} };
+      const res = {
+        json: (data) => resolve(data.logs || []),
+        status: () => ({ json: reject })
+      };
+      logsController.getAllLogs(req, res);
+    });
+
+    // Filter logs for this user
+    const userLogs = logs.filter(log => log.userId === userId);
+
+    if (userLogs.length < 20) {
+      throw new Error('Need at least 20 log entries for accuracy evaluation');
+    }
+
+    const response = await axios.post(
+      `${ML_SERVER_URL}/evaluate-accuracy`,
+      { 
+        logs: userLogs,
+        test_size: Math.min(10, Math.floor(userLogs.length * 0.2))
+      },
+      {
+        headers: { 'Content-Type': 'application/json' },
+        timeout: 60000
       }
     );
 
     return response.data;
 
   } catch (error) {
-    console.error('ML server error:', error.message);
+    console.error('Accuracy evaluation error:', error.message);
     throw error;
   }
 };

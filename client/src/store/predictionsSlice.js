@@ -1,18 +1,20 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { predictionsApi } from '../api/predictionsApi';
 
-export const generatePredictions = createAsyncThunk(
-  'predictions/generate',
+// Async thunk to generate automatic predictions (real logs only)
+export const generateAutoPredictions = createAsyncThunk(
+  'predictions/generateAuto',
   async (logs) => {
     const response = await predictionsApi.predict(logs);
     return response.prediction;
   }
 );
 
-export const recordAppAccess = createAsyncThunk(
-  'predictions/recordAppAccess',
-  async ({ logs, appDisplayName }) => {
-    const response = await predictionsApi.recordAppAccess(logs, appDisplayName);
+// Async thunk to generate manual predictions (with test apps)
+export const generateManualPredictions = createAsyncThunk(
+  'predictions/generateManual',
+  async (logs) => {
+    const response = await predictionsApi.predict(logs);
     return response.prediction;
   }
 );
@@ -20,43 +22,55 @@ export const recordAppAccess = createAsyncThunk(
 const predictionsSlice = createSlice({
   name: 'predictions',
   initialState: {
-    predictions: {},
+    autoPredictions: {},
+    manualPredictions: {},
+    manualLogs: [], // User's test logs
     loading: false,
     error: null,
-    recordingApp: null,
   },
   reducers: {
-    setRecordingApp: (state, action) => {
-      state.recordingApp = action.payload;
+    addManualTestApp: (state, action) => {
+      const { appDisplayName, timestamp } = action.payload;
+      state.manualLogs.push({
+        appDisplayName,
+        createdDateTime: timestamp || new Date().toISOString(),
+        isManualTest: true
+      });
+    },
+    resetManualLogs: (state, action) => {
+      state.manualLogs = action.payload; // Reset to original logs
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(generatePredictions.pending, (state) => {
+      // Auto predictions
+      .addCase(generateAutoPredictions.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(generatePredictions.fulfilled, (state, action) => {
+      .addCase(generateAutoPredictions.fulfilled, (state, action) => {
         state.loading = false;
-        state.predictions = action.payload;
+        state.autoPredictions = action.payload;
       })
-      .addCase(generatePredictions.rejected, (state, action) => {
+      .addCase(generateAutoPredictions.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
-      .addCase(recordAppAccess.pending, (state, action) => {
-        state.recordingApp = action.meta.arg.appDisplayName;
+      // Manual predictions
+      .addCase(generateManualPredictions.pending, (state) => {
+        state.loading = true;
+        state.error = null;
       })
-      .addCase(recordAppAccess.fulfilled, (state, action) => {
-        state.predictions = action.payload;
-        state.recordingApp = null;
+      .addCase(generateManualPredictions.fulfilled, (state, action) => {
+        state.loading = false;
+        state.manualPredictions = action.payload;
       })
-      .addCase(recordAppAccess.rejected, (state, action) => {
+      .addCase(generateManualPredictions.rejected, (state, action) => {
+        state.loading = false;
         state.error = action.error.message;
-        state.recordingApp = null;
       });
   },
 });
 
-export const { setRecordingApp } = predictionsSlice.actions;
+export const { addManualTestApp, resetManualLogs } = predictionsSlice.actions;
 export default predictionsSlice.reducer;

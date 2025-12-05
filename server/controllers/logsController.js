@@ -71,6 +71,10 @@ exports.getAllLogs = async (req, res) => {
         });
     }
     
+    // Add pagination parameters
+    const limit = parseInt(req.query.limit) || 1000; // Default 1000 logs
+    const offset = parseInt(req.query.offset) || 0;
+    
     const containerName = "json-signin-logs"; // Your container name
     const containerClient = blobServiceClient.getContainerClient(containerName);
 
@@ -110,8 +114,12 @@ exports.getAllLogs = async (req, res) => {
             return new Date(b.createdDateTime) - new Date(a.createdDateTime);
         });
 
-        // 4. --- Format the logs *after* sorting ---
-        const formattedLogs = allLogs.map(log => {
+        // 4. --- Apply pagination ---
+        const totalLogs = allLogs.length;
+        const paginatedLogs = allLogs.slice(offset, offset + limit);
+
+        // 5. --- Format the logs *after* sorting and pagination ---
+        const formattedLogs = paginatedLogs.map(log => {
             const d = new Date(log.createdDateTime);
             const date = `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
             const minutes = d.getMinutes().toString().padStart(2, '0');
@@ -126,8 +134,14 @@ exports.getAllLogs = async (req, res) => {
             };
         });
 
-        // 5. Send the sorted and formatted logs
-        res.json(formattedLogs);
+        // 6. Send the sorted and formatted logs with metadata
+        res.json({
+            logs: formattedLogs,
+            total: totalLogs,
+            limit: limit,
+            offset: offset,
+            hasMore: (offset + limit) < totalLogs
+        });
 
     } catch (error) {
         console.error(error);
@@ -247,6 +261,30 @@ exports.getLogPatterns = async (req, res) => {
             count: patternCounts[patternName]
         }));
 
+        // 5.5 Aggregate similar patterns (group by first 2-3 apps)
+        const aggregatedCounts = {};
+        chartData.forEach(item => {
+            const apps = item.name.split(' → ');
+            // Take first 2-3 apps as the pattern signature
+            const signature = apps.slice(0, Math.min(3, apps.length)).join(' → ');
+            
+            if (!aggregatedCounts[signature]) {
+                aggregatedCounts[signature] = {
+                    name: signature + (apps.length > 3 ? ' → ...' : ''),
+                    count: 0,
+                    variations: []
+                };
+            }
+            aggregatedCounts[signature].count += item.count;
+            aggregatedCounts[signature].variations.push(item.name);
+        });
+
+        // Convert back to array
+        chartData = Object.values(aggregatedCounts).map(item => ({
+            name: item.name,
+            count: item.count
+        }));
+
         // 6. Sort to rank by frequency and send Top 10
         chartData.sort((a, b) => b.count - a.count);
         res.json(chartData.slice(0, 10));
@@ -340,5 +378,62 @@ exports.getAllLogsGroupedByUser = async (req, res) => {
     } catch (error) {
         console.error('Error fetching grouped logs:', error);
         res.status(500).send({ message: "Error fetching grouped logs", error: error.message });
+    }
+};
+
+// === FUNCTION 4: Get Pattern Chains from ML Model ===
+exports.getPatternChains = async (req, res) => {
+    try {
+        const axios = require('axios');
+        
+        // Get ML server URL from environment or default to localhost
+        const ML_SERVER_URL = process.env.ML_SERVER_URL || 'http://localhost:5001';
+        const AZURE_ML_KEY = process.env.AZURE_ML_KEY || '';
+        const isAzureML = ML_SERVER_URL.includes('inference.ml.azure.com');
+        
+        // Prepare headers
+        const headers = {};
+        if (isAzureML && AZURE_ML_KEY) {
+            headers['Authorization'] = `Bearer ${AZURE_ML_KEY}`;
+        }
+        
+        // Determine endpoint URL
+        const endpointUrl = isAzureML ? ML_SERVER_URL : `${ML_SERVER_URL}/pattern-transitions`;
+        
+        // Call ML server to get model-learned pattern transitions
+        const response = await axios.get(endpointUrl, { headers });
+        
+        if (!response.data.success) {
+            throw new Error('ML server returned error');
+        }
+        
+        // Format response: convert probability to count-like display for consistency
+        const formattedTransitions = response.data.transitions.map(item => {
+            return {
+                pattern: item.pattern,
+                predecessors: item.predecessors.map(pred => ({
+                    pattern: pred.pattern,
+                    count: Math.round(pred.confidence), // Use confidence % as display count
+                    probability: pred.probability
+                })),
+                successors: item.successors.map(succ => ({
+                    pattern: succ.pattern,
+                    count: Math.round(succ.confidence), // Use confidence % as display count
+                    probability: succ.probability
+                }))
+            };
+        });
+        
+        res.json(formattedTransitions);
+        
+    } catch (error) {
+        console.error('Error fetching pattern chains from ML model:', error);
+        
+        // Fallback: return empty transitions if ML server is down
+        res.status(500).json({ 
+            message: "ML server unavailable for pattern transitions", 
+            error: error.message,
+            fallback: []
+        });
     }
 };

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { BrainCircuit, AlertCircle } from 'lucide-react';
+import { Sparkles, AlertCircle } from 'lucide-react';
 import { fetchPersonas, setSelectedPersona } from '../store/personaSlice';
 import { fetchLogs, fetchAllGroupedLogs } from '../store/logsSlice';
 import { usePredictions } from '../hooks/usePredictions';
@@ -21,11 +21,9 @@ function PredictionsPage() {
 
   // Custom hooks
   const {
-    predictions,
+    autoPredictions,
     loading: predictionsLoading,
     error: predictionsError,
-    recordingApp,
-    handleRecordAppAccess,
   } = usePredictions(logs);
 
   const {
@@ -33,7 +31,7 @@ function PredictionsPage() {
     setShowFeedbackModal,
     handleIncorrectPrediction,
     submitFeedback,
-  } = useFeedback(logs, predictions, selectedPersona);
+  } = useFeedback(logs, autoPredictions, selectedPersona);
 
   // Fetch grouped logs and personas on mount
   useEffect(() => {
@@ -63,7 +61,7 @@ function PredictionsPage() {
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 flex-shrink-0">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">
-            <BrainCircuit className="w-8 h-8 text-[#006747]" />
+            <Sparkles className="w-8 h-8 text-[#006747]" />
             Authentication Analytics
           </h1>
           <p className="text-gray-500 mt-1 ml-11">
@@ -91,11 +89,9 @@ function PredictionsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 flex-1 min-h-0 mt-8">
         <ActivityLogs logs={logs} loading={logsLoading} />
         <Predictions
-          predictions={predictions}
+          predictions={autoPredictions}
           loading={predictionsLoading}
           onIncorrectPrediction={handleIncorrectPrediction}
-          onRecordAppAccess={handleRecordAppAccess}
-          recordingApp={recordingApp}
         />
       </div>
 

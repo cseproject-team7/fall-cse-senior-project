@@ -6,9 +6,7 @@ import PredictionTimeline from './PredictionTimeline';
 const Predictions = ({ 
   predictions, 
   loading, 
-  onIncorrectPrediction, 
-  onRecordAppAccess, 
-  recordingApp 
+  onIncorrectPrediction
 }) => {
   return (
     <div className="bg-white rounded-xl shadow-md border border-gray-200 flex flex-col h-full overflow-hidden">
@@ -18,8 +16,7 @@ const Predictions = ({
           <h2 className="text-lg font-bold text-gray-800">ML Predictions</h2>
         </div>
         <span className="px-3 py-1 bg-[#CDB87D] text-[#006747] text-xs font-bold rounded-full">
-          {predictions.predictions?.length || 0} Prediction
-          {predictions.predictions?.length !== 1 ? 's' : ''}
+          Real-Time Analysis
         </span>
       </div>
 
@@ -29,7 +26,7 @@ const Predictions = ({
             <div className="loader"></div>
             <p className="mt-4 text-gray-500">Generating predictions...</p>
           </div>
-        ) : !predictions.predictions || predictions.predictions.length === 0 ? (
+        ) : !predictions || !predictions.next_pattern ? (
           <div className="flex flex-col items-center justify-center h-full text-gray-400">
             <BrainCircuit className="w-16 h-16 mb-4 opacity-10" />
             <p>No predictions available</p>
@@ -38,11 +35,12 @@ const Predictions = ({
           <div className="space-y-4">
             <PredictionCard
               prediction={predictions}
+              mode="auto"
               onIncorrectPrediction={onIncorrectPrediction}
-              onRecordAppAccess={onRecordAppAccess}
-              recordingApp={recordingApp}
             />
-            <PredictionTimeline predictions={predictions.predictions} />
+            {predictions.predictions && predictions.predictions.length > 0 && (
+              <PredictionTimeline predictions={predictions.predictions} />
+            )}
           </div>
         )}
       </div>
