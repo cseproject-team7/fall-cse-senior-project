@@ -3,18 +3,27 @@ import axios from 'axios';
 import { 
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer 
 } from 'recharts';
-import { Activity, List, BarChart2, Search } from 'lucide-react'; // Added 'Search' icon
+import { Activity, List, BarChart2, Search, TrendingUp } from 'lucide-react';
+import PatternChainViewer from '../components/PatternChainViewer';
 
 function LogDashboard() {
     const [logs, setLogs] = useState([]);
     const [appCountData, setAppCountData] = useState([]);
     const [patternData, setPatternData] = useState([]);
+    const [patternChainData, setPatternChainData] = useState([]);
     const [isLoadingLogs, setIsLoadingLogs] = useState(true);
     const [isLoadingPatterns, setIsLoadingPatterns] = useState(true);
     const [error, setError] = useState(null); 
+    const [selectedPattern, setSelectedPattern] = useState(null);
     
-    // --- NEW: State for Search ---
+    // --- State for Search ---
     const [searchQuery, setSearchQuery] = useState('');
+
+    // Helper to get auth headers
+    const getAuthHeaders = () => {
+        const token = localStorage.getItem('token');
+        return token ? { Authorization: `Bearer ${token}` } : {};
+    };
 
     useEffect(() => {
         const fetchLogs = async () => {
@@ -22,20 +31,34 @@ function LogDashboard() {
                 const API_URL = window.location.hostname === 'localhost' 
                     ? 'http://localhost:8080' 
                     : '';
-                const response = await axios.get(`${API_URL}/api/logs`); 
-                setLogs(response.data);
+                const response = await axios.get(`${API_URL}/api/logs?limit=1000`, {
+                    headers: getAuthHeaders()
+                });
+                
+                // Handle new pagination format
+                const logsData = response.data.logs || response.data;
+                setLogs(logsData);
                 
                 const appCounts = {};
-                response.data.forEach(log => {
+                logsData.forEach(log => {
                     let appName = log.appDisplayName;
                     if (appName === "MyUSF (OASIS)") appName = "MyUSF";
                     appCounts[appName] = (appCounts[appName] || 0) + 1;
                 });
-                const chartData = Object.keys(appCounts).map(appName => ({
-                    name: appName,
-                    logins: appCounts[appName]
-                }));
+                // Sort by count and take top 10
+                const chartData = Object.keys(appCounts)
+                    .map(appName => ({
+                        name: appName,
+                        logins: appCounts[appName]
+                    }))
+                    .sort((a, b) => b.logins - a.logins)
+                    .slice(0, 10);
                 setAppCountData(chartData);
+                
+                // Show info about total logs if paginated
+                if (response.data.total) {
+                    console.log(`Showing ${logsData.length} of ${response.data.total} total logs`);
+                }
             } catch (err) {
                 setError(err.message);
                 console.error("Failed to fetch logs:", err);
@@ -48,8 +71,16 @@ function LogDashboard() {
                 const API_URL = window.location.hostname === 'localhost' 
                     ? 'http://localhost:8080' 
                     : '';
-                const response = await axios.get(`${API_URL}/api/patterns`);
+                const response = await axios.get(`${API_URL}/api/patterns`, {
+                    headers: getAuthHeaders()
+                });
                 setPatternData(response.data);
+                
+                // Fetch pattern chains
+                const chainResponse = await axios.get(`${API_URL}/api/pattern-chains`, {
+                    headers: getAuthHeaders()
+                });
+                setPatternChainData(chainResponse.data);
             } catch (err) {
                 setError(err.message);
                 console.error("Failed to fetch patterns:", err);
@@ -64,6 +95,15 @@ function LogDashboard() {
     const truncate = (str, n) => {
         if (!str) return "";
         return str.length > n ? str.substr(0, n - 1) + "..." : str;
+    };
+
+    const handlePatternClick = (data) => {
+        // For ML behavioral patterns - clicking the button directly
+        setSelectedPattern(data);
+    };
+
+    const handleCloseChainViewer = () => {
+        setSelectedPattern(null);
     };
 
     // --- NEW: Filtering Logic ---
@@ -99,6 +139,13 @@ function LogDashboard() {
 
     return (
         <div className="p-8 space-y-8">
+            {/* Pattern Chain Viewer Modal */}
+            <PatternChainViewer 
+                selectedPattern={selectedPattern}
+                chainData={patternChainData}
+                onClose={handleCloseChainViewer}
+            />
+
             {/* Page Header */}
             <header>
                 <h1 className="text-3xl font-bold text-gray-900">Dashboard Overview</h1>
@@ -112,18 +159,31 @@ function LogDashboard() {
                 <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
                     <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-4">
                         <BarChart2 className="w-5 h-5 text-[#006747]" />
-                        <h2 className="text-lg font-bold text-gray-800">Logins Per Application</h2>
+                        <h2 className="text-lg font-bold text-gray-800">Top 10 Applications by Login Count</h2>
                     </div>
                     
                     <div className="h-[350px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={appCountData} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+                            <BarChart 
+                                data={appCountData} 
+                                margin={{ top: 5, right: 30, left: 20, bottom: 60 }}
+                            >
                                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                                <XAxis dataKey="name" stroke="#6b7280" fontSize={12} tickLine={false} axisLine={false} />
+                                <XAxis 
+                                    dataKey="name" 
+                                    stroke="#6b7280" 
+                                    fontSize={11} 
+                                    tickLine={false} 
+                                    axisLine={false}
+                                    angle={-45}
+                                    textAnchor="end"
+                                    height={80}
+                                />
                                 <YAxis allowDecimals={false} stroke="#6b7280" fontSize={12} tickLine={false} axisLine={false} />
                                 <Tooltip 
                                     contentStyle={{ backgroundColor: '#fff', borderRadius: '8px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}
                                     itemStyle={{ color: '#006747' }}
+                                    labelStyle={{ fontWeight: 'bold' }}
                                 />
                                 <Bar dataKey="logins" fill="#006747" radius={[4, 4, 0, 0]} /> 
                             </BarChart>
@@ -131,41 +191,81 @@ function LogDashboard() {
                     </div>
                 </div>
 
-                {/* Chart 2: Patterns */}
+                {/* Chart 2: Common User Journeys (App Sequences) */}
                 <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
                      <div className="flex items-center gap-2 mb-6 border-b border-gray-100 pb-4">
                         <Activity className="w-5 h-5 text-[#CDB87D]" />
                         <h2 className="text-lg font-bold text-gray-800">Common User Journeys</h2>
+                        <span className="ml-auto text-xs text-gray-500">Hover to see full sequence</span>
                     </div>
 
-                    <div className="h-[350px] w-full">
-                        <ResponsiveContainer width="100%" height="100%">
-                            <BarChart
-                                data={patternData}
-                                layout="vertical" 
-                                margin={{ top: 5, right: 30, left: 40, bottom: 5 }} 
-                            >
-                                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f0f0f0" />
-                                <XAxis type="number" allowDecimals={false} stroke="#6b7280" fontSize={12} tickLine={false} axisLine={false} />
-                                <YAxis 
-                                    type="category" 
-                                    dataKey="name" 
-                                    stroke="#6b7280" 
-                                    fontSize={11}
-                                    width={150}
-                                    tickFormatter={(tick) => truncate(tick, 25)} 
-                                    tickLine={false} 
-                                    axisLine={false}
-                                />
-                                <Tooltip 
-                                    contentStyle={{ backgroundColor: '#fff', borderRadius: '8px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}
-                                    itemStyle={{ color: '#CDB87D' }}
-                                />
-                                <Bar dataKey="count" fill="#CDB87D" radius={[0, 4, 4, 0]} />
-                            </BarChart>
-                        </ResponsiveContainer>
+                    {patternData.length > 0 ? (
+                        <div className="h-[350px] w-full">
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart
+                                    data={patternData.slice(0, 8).map((item, idx) => ({
+                                        ...item,
+                                        displayName: `Pattern ${idx + 1}`
+                                    }))}
+                                    layout="vertical" 
+                                    margin={{ top: 5, right: 30, left: 80, bottom: 5 }}
+                                >
+                                    <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f0f0f0" />
+                                    <XAxis type="number" allowDecimals={false} stroke="#6b7280" fontSize={12} tickLine={false} axisLine={false} />
+                                    <YAxis 
+                                        type="category" 
+                                        dataKey="displayName" 
+                                        stroke="#6b7280" 
+                                        fontSize={12}
+                                        width={70}
+                                        tickLine={false} 
+                                        axisLine={false}
+                                    />
+                                    <Tooltip 
+                                        contentStyle={{ backgroundColor: '#fff', borderRadius: '8px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)', maxWidth: '400px' }}
+                                        itemStyle={{ color: '#CDB87D' }}
+                                        labelStyle={{ fontWeight: 'bold', fontSize: '12px', marginBottom: '4px' }}
+                                        formatter={(value, name, props) => [
+                                            `${value} occurrences`,
+                                            props.payload.name.replace(/Microsoft 365 Sign-in →\s*/gi, '')
+                                        ]}
+                                    />
+                                    <Bar dataKey="count" fill="#CDB87D" radius={[0, 4, 4, 0]} />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    ) : (
+                        <div className="h-[350px] flex items-center justify-center text-gray-400">
+                            <p>No journey patterns detected</p>
+                        </div>
+                    )}
+                </div>
+            </div>
+
+            {/* --- NEW: ML Behavioral Patterns Section --- */}
+            <div className="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                <div className="flex items-center gap-2 mb-4 border-b border-gray-100 pb-4">
+                    <TrendingUp className="w-5 h-5 text-purple-600" />
+                    <h2 className="text-lg font-bold text-gray-800">ML-Learned Behavioral Patterns</h2>
+                    <div className="ml-auto flex items-center gap-2 text-xs text-gray-500">
+                        <span>Click a pattern to see flow transitions</span>
                     </div>
                 </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {patternChainData.map((item) => (
+                        <button
+                            key={item.pattern}
+                            onClick={() => setSelectedPattern(item.pattern)}
+                            className="px-4 py-3 bg-gradient-to-br from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100 border-2 border-purple-200 hover:border-purple-400 rounded-lg font-bold text-purple-800 transition-all hover:shadow-md text-sm"
+                        >
+                            {item.pattern}
+                        </button>
+                    ))}
+                </div>
+                <p className="text-xs text-center text-gray-500 mt-4">
+                    8 behavioral patterns learned from training data
+                </p>
             </div>
 
             {/* --- Table Section with Search --- */}
