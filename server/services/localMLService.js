@@ -1,17 +1,13 @@
 const axios = require('axios');
 
-// ML Server Configuration
-// Use environment variable for production (separate ML server)
-// Default to localhost for development
-const ML_SERVER_URL = process.env.ML_SERVER_URL || 'http://localhost:5001';
-const AZURE_ML_KEY = process.env.AZURE_ML_KEY || '';
-
-// Check if using Azure ML endpoint
-const isAzureML = ML_SERVER_URL.includes('inference.ml.azure.com');
-
 // Main prediction function - calls dual-head LSTM server
 exports.predict = async (data) => {
   try {
+    // Read configuration dynamically (for testing)
+    const ML_SERVER_URL = process.env.ML_SERVER_URL || 'http://localhost:5001';
+    const AZURE_ML_KEY = process.env.AZURE_ML_KEY || '';
+    const isAzureML = ML_SERVER_URL.includes('inference.ml.azure.com');
+
     // Ensure data is an array
     let payload = data;
     if (!Array.isArray(data)) {
@@ -91,6 +87,11 @@ exports.predictNextApp = exports.predict;
 // Predict with new app access - adds app to history and re-predicts
 exports.predictWithNewAccess = async (logs, appDisplayName) => {
   try {
+    // Read configuration dynamically (for testing)
+    const ML_SERVER_URL = process.env.ML_SERVER_URL || 'http://localhost:5001';
+    const AZURE_ML_KEY = process.env.AZURE_ML_KEY || '';
+    const isAzureML = ML_SERVER_URL.includes('inference.ml.azure.com');
+
     console.log('📝 Recording new app access:', appDisplayName);
     
     // Convert logs to proper format
@@ -160,6 +161,11 @@ exports.predictWithNewAccess = async (logs, appDisplayName) => {
 // Persona Classifier - direct call to ML server
 exports.predictPersona = async (userId, records) => {
   try {
+    // Read configuration dynamically (for testing)
+    const ML_SERVER_URL = process.env.ML_SERVER_URL || 'http://localhost:5001';
+    const AZURE_ML_KEY = process.env.AZURE_ML_KEY || '';
+    const isAzureML = ML_SERVER_URL.includes('inference.ml.azure.com');
+
     if (!userId || !records || !Array.isArray(records)) {
       throw new Error('Expected userId and records (array of app access records)');
     }
@@ -210,6 +216,9 @@ exports.predictPersona = async (userId, records) => {
 // Evaluate accuracy on user logs
 exports.evaluateAccuracy = async (userId) => {
   try {
+    // Read configuration dynamically (for testing)
+    const ML_SERVER_URL = process.env.ML_SERVER_URL || 'http://localhost:5001';
+
     // Fetch user logs
     const logsController = require('../controllers/logsController');
     const logs = await new Promise((resolve, reject) => {

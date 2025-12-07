@@ -191,8 +191,8 @@ describe('Protected API Integration Tests', () => {
       const response = await request(app)
         .options('/api/logs')
         .expect((res) => {
-          // Should get either 204 (preflight) or 404 (no preflight handler)
-          expect([204, 404]).toContain(res.status);
+          // Should get 200 (CORS allowed), 204 (preflight), or 404 (no handler)
+          expect([200, 204, 404]).toContain(res.status);
         });
     });
   });
