@@ -86,6 +86,10 @@ describe('localMLService', () => {
     });
 
     it('should parse string JSON response from Azure ML', async () => {
+      // Temporarily override for this test
+      const originalUrl = process.env.ML_SERVER_URL;
+      const originalKey = process.env.AZURE_ML_KEY;
+      
       process.env.ML_SERVER_URL = 'https://test.inference.ml.azure.com/score';
       process.env.AZURE_ML_KEY = 'test-key';
 
@@ -105,6 +109,10 @@ describe('localMLService', () => {
       );
 
       expect(result.success).toBe(true);
+      
+      // Restore original values
+      process.env.ML_SERVER_URL = originalUrl;
+      process.env.AZURE_ML_KEY = originalKey;
     });
 
     it('should throw error when ML response success is false', async () => {
