@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken');
 const authMiddleware = require('../../middleware/authMiddleware');
 const { createReq, createRes, createNext } = require('../utils/httpMocks');
 
-const JWT_SECRET = 'test-jwt-secret-key';
+// Mock JWT_SECRET for tests
+const JWT_SECRET = 'test-jwt-secret-key-for-unit-tests';
 
 describe('authMiddleware', () => {
   let originalEnv;

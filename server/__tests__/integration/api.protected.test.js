@@ -9,7 +9,8 @@ jest.mock('../../services/kafkaService');
 jest.mock('@azure/storage-blob');
 jest.mock('axios');
 
-const JWT_SECRET = 'test-jwt-secret-key';
+// Mock JWT_SECRET for tests
+const JWT_SECRET = 'test-jwt-secret-key-for-integration-tests';
 
 describe('Protected API Integration Tests', () => {
   let app;
