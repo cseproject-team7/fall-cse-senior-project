@@ -75,7 +75,7 @@ exports.submitFeedback = async (req, res) => {
     }
 
     // Store feedback for model retraining
-    const feedbackId = await kafkaService.storeFeedback({
+    const result = await kafkaService.storeFeedback({
       logs,
       prediction,
       actualApp,
@@ -85,7 +85,7 @@ exports.submitFeedback = async (req, res) => {
 
     res.json({
       success: true,
-      feedbackId,
+      feedbackId: result.feedbackId,
       message: 'Feedback stored for model retraining'
     });
 

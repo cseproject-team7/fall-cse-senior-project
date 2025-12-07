@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET;
 
 const authMiddleware = (req, res, next) => {
     try {
@@ -11,8 +10,8 @@ const authMiddleware = (req, res, next) => {
 
         const token = authHeader.split(' ')[1]; // Get just the token
 
-        // 2. Verify the token
-        const decoded = jwt.verify(token, JWT_SECRET);
+        // 2. Verify the token (read JWT_SECRET dynamically for testing)
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
         // 3. Token is valid. Add user data to the request.
         req.user = { userId: decoded.userId, email: decoded.email };

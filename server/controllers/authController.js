@@ -1,14 +1,14 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-// Get our admin user/hash and secret from the .env file
-const ADMIN_USER = process.env.ADMIN_USER;
-const ADMIN_HASH = process.env.ADMIN_HASH;
-const JWT_SECRET = process.env.JWT_SECRET;
-
 exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
+
+        // Get credentials from environment (read dynamically for testing)
+        const ADMIN_USER = process.env.ADMIN_USER;
+        const ADMIN_HASH = process.env.ADMIN_HASH;
+        const JWT_SECRET = process.env.JWT_SECRET;
 
         // 1. Check for email and password
         if (!email || !password) {
