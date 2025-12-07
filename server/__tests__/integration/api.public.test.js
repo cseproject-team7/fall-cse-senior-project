@@ -105,15 +105,14 @@ describe('Public API Integration Tests', () => {
   });
 
   describe('GET /api/logs-grouped', () => {
-    it('should return logs grouped by user', async () => {
-      // Since this doesn't require auth in current code
+    it('should return 503 when Azure Storage not configured', async () => {
+      // This endpoint requires Azure Storage which is not configured in tests
       const response = await request(app)
         .get('/api/logs-grouped')
-        .expect(200);
+        .expect(503);
 
-      // Response should have users array and logsByUser object
-      expect(response.body.users).toBeDefined();
-      expect(response.body.logsByUser).toBeDefined();
+      expect(response.body.success).toBe(false);
+      expect(response.body.error).toContain('Azure Storage not configured');
     });
   });
 
