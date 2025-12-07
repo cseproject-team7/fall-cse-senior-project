@@ -19,11 +19,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '22.x'
-      
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
 
       - name: Build Client and Install Server Dependencies
         run: |
@@ -38,51 +33,6 @@ jobs:
 
           echo "Moving client build to server/public..."
           mv ../client/build ./public
-
-      - name: Prepare ML server for deployment (copy files and vendor deps)
-        run: |
-          echo "Copying ml_server.py and model artifacts into server/..."
-          mkdir -p server/ml
-          if [ -f "ml_server.py" ]; then
-            cp ml_server.py server/ml/ml_server.py
-          else
-            echo "WARNING: ml_server.py not found at repo root"
-          fi
-          if [ -d "model_artifacts" ]; then
-            cp -r model_artifacts server/ml/model_artifacts
-          else
-            echo "NOTE: model_artifacts directory not found; ensure models are packaged if required"
-          fi
-
-          echo "Vendoring Python dependencies into server/python_packages..."
-          python -m pip install --upgrade pip
-          # Minimal required libs for ml_server.py; extend if your code imports more
-          python -m pip install --target server/python_packages flask flask-cors joblib pandas scikit-learn
-
-          echo "Creating startup.sh to launch Python ML server and Node API..."
-          cat > server/startup.sh << 'EOF'
-          #!/usr/bin/env bash
-          set -euo pipefail
-          export PYTHONUNBUFFERED=1
-          export PYTHONPATH="$PYTHONPATH:/home/site/wwwroot/python_packages"
-          
-          # Start Python ML server in background
-          if [ -f "./ml/ml_server.py" ]; then
-            echo "Starting Python ML server on 0.0.0.0:5001"
-            python3 ./ml/ml_server.py &
-          else
-            echo "ml/ml_server.py not found; skipping Python server"
-          fi
-          
-          # Start Node server
-          echo "Starting Node server..."
-          if [ -f "./server.js" ]; then
-            node server.js
-          else
-            npm start
-          fi
-          EOF
-          chmod +x server/startup.sh
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -104,27 +54,10 @@ jobs:
         uses: azure/login@v2
         with:
           creds: '{"clientId":"${{ secrets.AZURE_CLIENT_ID }}","clientSecret":"${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}","tenantId":"${{ secrets.AZURE_TENANT_ID }}"}'
-
-      - name: Configure App Service startup and settings
-        run: |
-          az account set --subscription "${{ secrets.AZURE_SUBSCRIPTION_ID }}"
-          # Set startup command (Linux) to run our startup script
-          az webapp config set \
-            -g "${{ secrets.AZURE_RESOURCE_GROUP }}" \
-            -n "${{ secrets.AZURE_WEBAPP_NAME }}" \
-            --startup-file "bash startup.sh"
-          # Ensure the Node app points to the in-app ML server
-          az webapp config appsettings set \
-            -g "${{ secrets.AZURE_RESOURCE_GROUP }}" \
-            -n "${{ secrets.AZURE_WEBAPP_NAME }}" \
-            --settings \
-              NODE_ENV=production \
-              ML_SERVER_URL="http://127.0.0.1:5001"
-
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
           slot-name: 'Production'
-          package: server/
+          package: .
