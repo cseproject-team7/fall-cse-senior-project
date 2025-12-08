@@ -9,12 +9,8 @@ jest.mock('../../services/kafkaService');
 jest.mock('@azure/storage-blob');
 jest.mock('axios');
 
-<<<<<<< HEAD
 // Mock JWT_SECRET for tests
 const JWT_SECRET = 'test-jwt-secret-key-for-integration-tests';
-=======
-const JWT_SECRET = 'test-jwt-secret-key';
->>>>>>> 73868ff (Unit and integration tests)
 
 describe('Protected API Integration Tests', () => {
   let app;
@@ -196,18 +192,8 @@ describe('Protected API Integration Tests', () => {
       const response = await request(app)
         .options('/api/logs')
         .expect((res) => {
-<<<<<<< HEAD
-<<<<<<< HEAD
           // Should get 200 (CORS allowed), 204 (preflight), or 404 (no handler)
           expect([200, 204, 404]).toContain(res.status);
-=======
-          // Should get either 204 (preflight) or 404 (no preflight handler)
-          expect([204, 404]).toContain(res.status);
->>>>>>> 73868ff (Unit and integration tests)
-=======
-          // Should get 200 (CORS allowed), 204 (preflight), or 404 (no handler)
-          expect([200, 204, 404]).toContain(res.status);
->>>>>>> 1072575 (fix: make all tests pass)
         });
     });
   });

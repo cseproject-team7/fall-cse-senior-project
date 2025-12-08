@@ -3,17 +3,10 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { createReq, createRes } = require('../utils/httpMocks');
 
-<<<<<<< HEAD
 // Mock environment variables for tests (independent of .env file)
 const ADMIN_USER = 'admin@usf.edu';
 const ADMIN_PASSWORD = 'TestPassword123!';
 const JWT_SECRET = 'test-jwt-secret-key-for-unit-tests';
-=======
-// Mock environment variables
-const ADMIN_USER = 'admin@usf.edu';
-const ADMIN_PASSWORD = 'TestPassword123!';
-const JWT_SECRET = 'test-jwt-secret-key';
->>>>>>> 73868ff (Unit and integration tests)
 
 describe('authController', () => {
   let originalEnv;
