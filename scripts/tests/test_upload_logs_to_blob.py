@@ -1,5 +1,5 @@
 """
-Unit tests for upload_logs_to_blob.py - Azure Blob Storage upload script
+Unit tests for azure_scripts/upload_logs_to_blob.py - Azure Blob Storage upload script
 """
 import pytest
 import sys
@@ -9,7 +9,7 @@ import json
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-import upload_logs_to_blob
+from azure_scripts import upload_logs_to_blob
 
 
 @pytest.mark.unit

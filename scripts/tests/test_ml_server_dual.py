@@ -1,5 +1,5 @@
 """
-Unit tests for ml_server_dual.py - Dual-Head LSTM ML Server
+Unit tests for local_ml_server.py - Dual-Head LSTM ML Server
 """
 import pytest
 import sys
@@ -13,7 +13,7 @@ import joblib
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import after path setup
-import ml_server_dual
+import local_ml_server as ml_server_dual
 
 
 @pytest.mark.unit

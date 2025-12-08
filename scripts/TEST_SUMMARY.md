@@ -12,11 +12,10 @@ Comprehensive test suite for Python ML server and data processing scripts using 
 
 | Test File | What It Tests | Test Count |
 |-----------|--------------|------------|
-| `test_ml_server_dual.py` | Dual-Head LSTM ML server | 20+ tests |
-| `test_create_logs.py` | Log generation script | 25+ tests |
-| `test_upload_logs_to_blob.py` | Azure Blob upload | 15+ tests |
+| `test_ml_server_dual.py` | Dual-Head LSTM ML server (local_ml_server.py) | 20+ tests |
+| `test_upload_logs_to_blob.py` | Azure Blob upload (azure_scripts/) | 15+ tests |
 
-**Total: 60+ tests**
+**Total: 35+ tests**
 
 ### Supporting Files
 
@@ -63,43 +62,7 @@ Comprehensive test suite for Python ML server and data processing scripts using 
 
 ---
 
-### 2. Log Generation Tests (`test_create_logs.py`)
-
-#### ✅ User Generation
-- Correct number of users created
-- Required fields present
-- USF email domain validation
-- Valid persona assignment
-- Unique user IDs
-
-#### ✅ Sign-in Log Creation
-- All Microsoft Graph API fields
-- ISO timestamp format
-- Persona-based app selection
-- IP address matches location
-- Tampa, Florida location
-- 95% success rate validation
-
-#### ✅ Persona Definitions
-- All personas have required fields
-- App probabilities sum to 1.0
-- Location probabilities sum to 1.0
-- Engineering junior has technical apps
-- Admin employee office hours logic
-
-#### ✅ Location Configuration
-- Valid IP address prefixes
-- USF campus IP range (131.247.x.x)
-- Off-campus IP range
-
-#### ✅ Integration Tests
-- Event Hub configuration validation
-- Producer creation
-- End-to-end workflow
-
----
-
-### 3. Azure Upload Tests (`test_upload_logs_to_blob.py`)
+### 2. Azure Upload Tests (`test_upload_logs_to_blob.py`)
 
 #### ✅ Blob Deletion
 - Delete all blobs with prefix
@@ -136,12 +99,12 @@ Comprehensive test suite for Python ML server and data processing scripts using 
 - Test individual functions in isolation
 - Mock all external dependencies
 - Fast execution (< 1ms per test)
-- **50+ unit tests**
+- **30+ unit tests**
 
 ### Integration Tests (`@pytest.mark.integration`)
 - Test complete workflows
 - Mock only external services (Azure, Event Hub)
-- **10+ integration tests**
+- **5+ integration tests**
 
 ---
 
